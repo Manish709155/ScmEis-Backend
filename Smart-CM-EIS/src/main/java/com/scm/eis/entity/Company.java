@@ -1,19 +1,23 @@
 package com.scm.eis.entity;
 
-import com.scm.eis.constant.Services;
+import com.scm.eis.constant.CompanyServices;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Table(name="company")
-@Setter
-@Getter
-@ToString
 @Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class Company {
+@Table(name = "company")
+@NoArgsConstructor
+@Getter
+@Setter
+public class Company  extends SuperEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -32,9 +36,6 @@ public class Company {
 
     @Column(name="registration_number")
     String registrationNumber;
-
-    @Column(name="active")
-    Boolean active =Boolean.TRUE;
 
     @Column(name="company_foundation_date")
     LocalDateTime companyFoundationDate;
@@ -56,10 +57,7 @@ public class Company {
 
     @Enumerated(value = EnumType.STRING)
     @Column(name="services")
-    Services services;
-
-    @Column(name="deleted")
-    Boolean deleted =Boolean.FALSE;
+    CompanyServices services;
 
     @Column(name="company_emailid")
     String companyEmailId;
@@ -69,5 +67,6 @@ public class Company {
 
     @Column(name="mobile_number")
     String mobileNumber;
+
 
 }

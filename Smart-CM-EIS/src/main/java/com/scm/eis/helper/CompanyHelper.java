@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
@@ -33,6 +34,7 @@ public class CompanyHelper {
         company.setCompanyEmailId(request.getCompanyEmailId());
         company.setPassword(request.getPassword());
         company.setMobileNumber(request.getMobileNumber());
+        company.setCreatedOn(LocalDateTime.now());
         return company;
     }
 

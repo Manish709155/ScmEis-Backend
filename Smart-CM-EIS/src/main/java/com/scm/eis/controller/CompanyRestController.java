@@ -1,7 +1,5 @@
 package com.scm.eis.controller;
 
-import com.scm.eis.constant.Services;
-import com.scm.eis.entity.Company;
 import com.scm.eis.helper.CompanyHelper;
 import com.scm.eis.request.CompanyRequest;
 import com.scm.eis.service.CompanyService;
@@ -20,14 +18,7 @@ public class CompanyRestController {
 
     @Autowired
     CompanyHelper helper;
-// Entity(Table Structure  define/ create)->
-// service(Create  Method for required API)->
-// ServiceImpl(Service Method implement)->Repository Interface Create
 
-//    ->extends JpaRepo->Method Call ServiceImpl call->
-//    DTO(Request and Response)->
-//    Helper class->Data Setter and Getter-1.controller layer
-//    and creating rest apis and calling service methods
     @PostMapping("create/company")
     public ResponseEntity<Object> creatCompany(@RequestBody CompanyRequest request){
 

@@ -1,9 +1,6 @@
 package com.scm.eis.request;
 
-import com.scm.eis.constant.Services;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.scm.eis.constant.CompanyServices;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -52,7 +49,7 @@ public class CompanyRequest implements Serializable {
     Double companyRevenues;
 
 
-    Services services;
+    CompanyServices services;
 
 
     boolean deleted;

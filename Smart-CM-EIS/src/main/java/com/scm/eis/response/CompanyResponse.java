@@ -1,6 +1,6 @@
 package com.scm.eis.response;
 
-import com.scm.eis.constant.Services;
+import com.scm.eis.constant.CompanyServices;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -52,7 +52,7 @@ public class CompanyResponse implements Serializable {
     Double companyRevenues;
 
 
-    Services services;
+    CompanyServices services;
 
 
 
