@@ -1,9 +1,6 @@
 package com.scm.eis.entity;
 
-import com.scm.eis.constant.AnyDisability;
-import com.scm.eis.constant.EmployeeCategory;
-import com.scm.eis.constant.EmployeeDepartment;
-import com.scm.eis.constant.GenderEnum;
+import com.scm.eis.constant.*;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

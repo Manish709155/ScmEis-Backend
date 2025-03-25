@@ -1,4 +1,4 @@
-package com.scm.eis.entity;
+package com.scm.eis.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
