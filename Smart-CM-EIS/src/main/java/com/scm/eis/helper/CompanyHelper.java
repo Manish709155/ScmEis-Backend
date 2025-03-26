@@ -1,9 +1,12 @@
 package com.scm.eis.helper;
 
+import com.scm.eis.constant.CompanyServices;
+import com.scm.eis.constant.CountryEnum;
 import com.scm.eis.entity.Company;
 import com.scm.eis.request.CompanyRequest;
 import com.scm.eis.response.CompanyResponse;
 import com.scm.eis.service.CompanyService;
+import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
@@ -17,8 +20,18 @@ public class CompanyHelper {
     @Autowired
     CompanyService companyService;
 
+    @Autowired
+    CommonUtil commonUtil;
+
+
+
     public Company getEntity(CompanyRequest request){
-        Company company = new Company();
+        Company company;
+        if (CommonUtil.isValid(request.getId())) {
+            company = companyService.findCompanyById(request.getId());
+        } else {
+          company = new Company();
+        }
         company.setName(request.getName());
         company.setLocation(request.getLocation());
         company.setStartTime(request.getStartTime());
@@ -30,11 +43,12 @@ public class CompanyHelper {
         company.setCompanyOwnerName(request.getCompanyOwnerName());
         company.setCurrentCeo(request.getCurrentCeo());
         company.setCompanyRevenues(request.getCompanyRevenues());
-        company.setServices(request.getServices());
+        company.setServices(CompanyServices.BOTH);
         company.setCompanyEmailId(request.getCompanyEmailId());
         company.setPassword(request.getPassword());
         company.setMobileNumber(request.getMobileNumber());
         company.setCreatedOn(LocalDateTime.now());
+        company.setCountryEnum(CountryEnum.INDIA);
         return company;
     }
 

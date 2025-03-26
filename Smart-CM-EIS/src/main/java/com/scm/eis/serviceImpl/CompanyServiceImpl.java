@@ -22,4 +22,6 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findById(companyId).get();
 
     }
+
+
 }

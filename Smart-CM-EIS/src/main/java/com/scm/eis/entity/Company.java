@@ -1,6 +1,7 @@
 package com.scm.eis.entity;
 
 import com.scm.eis.constant.CompanyServices;
+import com.scm.eis.constant.CountryEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -68,5 +69,8 @@ public class Company  extends SuperEntity implements Serializable {
     @Column(name="mobile_number")
     String mobileNumber;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "country")
+    CountryEnum countryEnum;
 
 }

@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -69,9 +70,17 @@ public class Employee extends SuperEntity implements Serializable {
     @Column(name = "employee_category")
     EmployeeCategory employeeCategory;
 
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    Company company;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "country")
+    CountryEnum countryEnum;
 
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    List<UserServiceRegistration> userServiceRegistrations;
 
 
 }

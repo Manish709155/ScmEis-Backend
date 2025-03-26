@@ -35,6 +35,7 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Column(name = "tech_solutions_types")
     TechSolutionsTypes techSolutionsTypes;
 
+
     @Column(name="ticket_number")
     String ticketNumber;
 
@@ -45,4 +46,28 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Enumerated(EnumType.STRING)
     @Column(name = "solution_status")
     SolutionStatus solutionStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "support_channel")
+    SupportChannel supportChannel;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language")
+    LanguageType language;
+
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @ManyToOne(targetEntity = Employee.class, fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "epmloyee_id")
+    Employee employee;
+
+    @Column(name = "query_invalid_reason", columnDefinition = "TEXT")
+    @Lob
+    String queryInvalidReason;
+
+    @Column(name="service_priority")
+    String servicePiority;
+
 }

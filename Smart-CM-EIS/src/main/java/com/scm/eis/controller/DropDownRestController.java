@@ -1,8 +1,6 @@
 package com.scm.eis.controller;
 
-import com.scm.eis.constant.CompanyServices;
-import com.scm.eis.constant.NonTechSolutionsTypes;
-import com.scm.eis.constant.TechSolutionsTypes;
+import com.scm.eis.constant.*;
 import com.scm.eis.util.DropdownUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +28,18 @@ public class DropDownRestController {
     @GetMapping(path = "/nonTechSolutionsTypesDropdown")
     public ResponseEntity<Object> nonTechSolutionsTypesDropdown() {
         return dropdownUtil.getResponseEntity(NonTechSolutionsTypes.class);
+    }
+
+    @GetMapping(path = "/cityDropdown")
+    public ResponseEntity<Object> getCityDropdown() {
+        return dropdownUtil.getResponseEntity(City.class);
+    }
+    @GetMapping(path = "/districtDropdown")
+    public ResponseEntity<Object> getDistrictDropdown() {
+        return dropdownUtil.getResponseEntity(District.class);
+    }
+    @GetMapping(path = "/stateDropdown")
+    public ResponseEntity<Object> getStateDropdown() {
+        return dropdownUtil.getResponseEntity(State.class);
     }
 }

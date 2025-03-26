@@ -11,7 +11,8 @@ import lombok.experimental.FieldDefaults;
 public enum CompanyServices
 {
  NON_TECH_SOLUTION_TYPES("Non Tech Solutions Types"),
- TechSolutionsTypes("Tech Solution Types");
+ TechSolutionsTypes("Tech Solution Types"),
+ BOTH("Both");
 
   final  String  displayName;
 }

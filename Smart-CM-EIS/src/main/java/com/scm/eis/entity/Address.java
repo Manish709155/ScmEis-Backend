@@ -1,6 +1,6 @@
 package com.scm.eis.entity;
 
-import com.scm.eis.constant.CountryEnum;
+import com.scm.eis.constant.*;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,14 +26,17 @@ public class Address extends SuperEntity implements Serializable {
     @Column(name="house_number")
     String HouseNumber;
 
-    @Column(name="city")
-    String City;
+    @Column(name = "city")
+    @Enumerated(EnumType.STRING)
+    City city;
 
-    @Column(name="state")
-    String state;
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    State state;
 
-    @Column(name="district")
-    String district;
+    @Column(name = "district")
+    @Enumerated(EnumType.STRING)
+    District district;
 
     @Column(name="post_office_name")
     String postOfficeName;
@@ -57,9 +60,17 @@ public class Address extends SuperEntity implements Serializable {
     @Column(name="landmark_nbyl")
     String landmarkNBYL;
 
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    User user;
+
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    Employee employee;
 
 
-
-
+    @Enumerated(value = EnumType.STRING)
+    @Column(name="address_type")
+    AddressType addressType;
 
 }
