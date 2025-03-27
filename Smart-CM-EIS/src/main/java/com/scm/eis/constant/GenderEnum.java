@@ -18,5 +18,5 @@ public enum GenderEnum {
     OTHER("Other"),
     PREFER_NOT_TO_SAY("Prefers not to disclose gender identity");
 
-    private final String description;
+    private final String genderType;
 }

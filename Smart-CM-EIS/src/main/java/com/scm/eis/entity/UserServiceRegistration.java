@@ -60,7 +60,7 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     User user;
 
     @ManyToOne(targetEntity = Employee.class, fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "epmloyee_id")
+    @JoinColumn(name = "employee_id")
     Employee employee;
 
     @Column(name = "query_invalid_reason", columnDefinition = "TEXT")

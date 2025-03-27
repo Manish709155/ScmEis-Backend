@@ -53,8 +53,6 @@ public class CompanyRequest implements Serializable {
     Double companyRevenues;
 
 
-    CompanyServices services;
-
 
     String companyEmailId;
 

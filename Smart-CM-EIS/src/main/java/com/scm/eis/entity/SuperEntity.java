@@ -31,8 +31,8 @@ public class SuperEntity implements Serializable {
     LocalDateTime updatedOn;
 
     @Column(name = "active")
-    @ColumnDefault(value = "0")
-    Boolean active = Boolean.FALSE;
+    @ColumnDefault(value = "1")
+    Boolean active = Boolean.TRUE;
 
     @ColumnDefault(value = "0")
     @Column(name = "deleted")

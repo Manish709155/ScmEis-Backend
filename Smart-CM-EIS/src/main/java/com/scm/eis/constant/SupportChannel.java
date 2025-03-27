@@ -11,7 +11,7 @@ public enum SupportChannel {
     HELPLINE_NUMBER("Toll-free number for customer support", "Fast", "24/7", "HIGH", "+1-800-HELP-NOW"),
     EMAIL_ID("Support via email responses", "Slow", "Business Hours", "LOW", "support@powercompany.com"),
     AI_CHATBOT("Automated chatbot for instant assistance", "Instant", "24/7", "MEDIUM", "chat.powercompany.com"),
-    SOCIAL_MEDIA("Support through social platforms", "Varies", "Business Hours", "LOW", "@PowerCompanySupport");
+    SOCIAL_MEDIA("Support through social platforms", "Quick Response", "Business Hours", "LOW", "@PowerCompanySupport");
 
     private final String description;
     private final String responseTime;
