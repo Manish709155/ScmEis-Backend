@@ -12,7 +12,9 @@ import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Component
@@ -48,5 +50,45 @@ public class UserHelper {
         newUser.setCompany(company);
         return  userService.createUser(newUser);
     }
+
+
     }
+    public String   logInUser(String userEmailId,String userMobileNo,String password) {
+        Optional<User> user = userService.findUserByEmailIdOrMobileNoAndPassword(userEmailId, userMobileNo, password);
+        if (user.isPresent()) {
+            return "User has been login successfully.....!";
+        } else {
+        return  "User not found......!";
+        }
+    }
+    public String validateOtp(String Otp) {
+        Optional<User> user = userService.findByUserOtp(Otp);
+          User usr=user.get();
+          if (Duration.between(usr.getOtpGeneratedTime(), LocalTime.now()).toMinutes() ==1){
+              return  "Otp has been validated....!";
+          }
+          else if (Duration.between(usr.getOtpGeneratedTime(), LocalTime.now()).toMinutes() > 1) {
+                usr.setUserOtp(CommonUtil.generateOtp());
+                usr.setOtpGeneratedTime(LocalTime.now());
+                userService.createUser(usr);
+                return "New otp has been send on your registered email bcs existing one expired....!";
+            }
+      return "Please enter valid otp....!";
+    }
+    public void forgotPassword(String userEmailId,String userMobileNo) {
+        Optional<User> user = userService.findUserByEmailIdOrMobileNo(userEmailId, userMobileNo);
+        User usr=user.get();
+        usr.setUserOtp(CommonUtil.generateOtp());
+        usr.setOtpGeneratedTime(LocalTime.now());
+        userService.createUser(user.get());
+
+    }
+    public String resetPassword(String userEmailId,String userMobileNo,String password ){
+        Optional<User> user = userService.findUserByEmailIdOrMobileNo(userEmailId, userMobileNo);
+        user.get().setPassword(password);
+        userService.createUser(user.get());
+        return "Password has beeb successfully updated...!";
+    }
+
+
 }

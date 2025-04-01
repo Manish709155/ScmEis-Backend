@@ -35,8 +35,16 @@ public class CommonUtil {
         return ticket.toString();
     }
     public static String generateServiceNumber() {
-        return IntStream.range(0, SERVICE_NUMBER_LENGTH)
+       return IntStream.range(0, SERVICE_NUMBER_LENGTH)
                 .mapToObj(i -> String.valueOf(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length()))))
                 .collect(Collectors.joining());
+    }
+
+    public static String generateOtp() {
+        StringBuilder ticket = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            ticket.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
+        }
+        return ticket.toString();
     }
 }

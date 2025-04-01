@@ -16,6 +16,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -82,4 +83,9 @@ public class User extends SuperEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     List<UserServiceRegistration> userServiceRegistrations;
 
+    @Column(name="user_otp")
+    String userOtp;
+
+    @Column(name = "otp_generated_time")
+    LocalTime otpGeneratedTime;
 }

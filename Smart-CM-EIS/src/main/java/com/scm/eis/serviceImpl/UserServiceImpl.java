@@ -28,4 +28,14 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findUserByEmailIdOrMobileNo(String userEmailId, String userMobileNo) {
         return userRepository.findUserByEmailIdOrMobileNo(userEmailId,userMobileNo);
     }
+
+    @Override
+    public Optional<User> findUserByEmailIdOrMobileNoAndPassword(String userEmailId, String userMobileNo, String password) {
+       return userRepository.findUserByEmailIdOrMobileNoAndPassword(userEmailId,userMobileNo,password);
+    }
+
+    @Override
+    public Optional<User> findByUserOtp(String otp) {
+        return userRepository.findByUserOtp(otp);
+    }
 }

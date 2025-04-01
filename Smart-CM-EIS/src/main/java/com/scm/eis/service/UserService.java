@@ -11,4 +11,10 @@ public interface UserService {
     User createUser(User user);
 
     Optional<User> findUserByEmailIdOrMobileNo(String userEmailId,String userMobileNo);
+
+    Optional<User> findUserByEmailIdOrMobileNoAndPassword(String userEmailId,String userMobileNo,String password);
+
+    Optional<User> findByUserOtp(String otp);
+
+
 }
