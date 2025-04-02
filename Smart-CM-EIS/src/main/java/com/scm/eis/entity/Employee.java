@@ -2,6 +2,7 @@ package com.scm.eis.entity;
 
 import com.scm.eis.constant.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,22 @@ public class Employee extends SuperEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Size(min = 1, max = 255)
+    @Column(name = "first_Name")
+    String firstName;
+
+    @Size(min = 1, max = 255)
+    @Column(name = "middle_name")
+    String middleName;
+
+    @Size(min = 1, max = 255)
+    @Column(name = "last_name")
+    String lastName;
+
+    @Size(min = 1, max = 255)
+    @Column(name = "password")
+    String password;
 
     @Column(name = "sapCard")
     String sapCard;
