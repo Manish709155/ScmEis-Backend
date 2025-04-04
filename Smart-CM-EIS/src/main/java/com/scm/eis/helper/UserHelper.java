@@ -6,6 +6,8 @@ import com.scm.eis.entity.Company;
 import com.scm.eis.entity.User;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.request.UserRequest;
+import com.scm.eis.response.UserListResponse;
+import com.scm.eis.response.UserResponse;
 import com.scm.eis.service.CompanyService;
 import com.scm.eis.service.UserService;
 import com.scm.eis.util.CommonUtil;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Component;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -87,7 +91,39 @@ public class UserHelper {
         Optional<User> user = userService.findUserByEmailIdOrMobileNo(userEmailId, userMobileNo);
         user.get().setPassword(password);
         userService.createUser(user.get());
-        return "Password has beeb successfully updated...!";
+        return "Password has been successfully updated...!";
+    }
+    public UserResponse getresponse(Optional<User> user){
+        return UserResponse.builder()
+                .id(user.get().getId())
+                .firstName(user.get().getFirstName())
+                .middleName(user.get().getMiddleName())
+                .lastName(user.get().getLastName())
+                .emailId(user.get().getEmailId())
+                .mobileNo(user.get().getMobileNo())
+                .consumerId(user.get().getConsumerId())
+                .roleType(user.get().getRoleType())
+                .genderType(user.get().getGenderType())
+                .countryEnum(user.get().getCountryEnum())
+                .build();
+    }
+    public List<UserListResponse> getAllUsers(List<User> users){
+        List<UserListResponse> responses= new ArrayList<>();
+        users.forEach(user ->{
+            responses.add(UserListResponse.builder()
+                    .id(user.getId())
+                    .firstName(user.getFirstName())
+                    .middleName(user.getMiddleName())
+                    .lastName(user.getLastName())
+                    .emailId(user.getEmailId())
+                    .mobileNo(user.getMobileNo())
+                    .consumerId(user.getConsumerId())
+                    .roleType(user.getRoleType())
+                    .genderType(user.getGenderType())
+                    .countryEnum(user.getCountryEnum())
+                    .build());
+        } );
+        return responses;
     }
 
 
