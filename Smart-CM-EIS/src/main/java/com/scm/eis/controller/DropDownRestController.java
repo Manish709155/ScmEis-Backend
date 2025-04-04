@@ -34,12 +34,69 @@ public class DropDownRestController {
     public ResponseEntity<Object> getCityDropdown() {
         return dropdownUtil.getResponseEntity(City.class);
     }
+
     @GetMapping(path = "/districtDropdown")
     public ResponseEntity<Object> getDistrictDropdown() {
         return dropdownUtil.getResponseEntity(District.class);
     }
+
     @GetMapping(path = "/stateDropdown")
     public ResponseEntity<Object> getStateDropdown() {
         return dropdownUtil.getResponseEntity(State.class);
+    }
+
+    @GetMapping(path = "/addressTypeDropdown")
+    public ResponseEntity<Object> getAddressTypeDropdown() {
+        return dropdownUtil.getResponseEntity(AddressType.class);
+    }
+
+    @GetMapping(path = "/anyDisabilityDropdown")
+    public ResponseEntity<Object> getAnyDisabilityDropdown() {
+        return dropdownUtil.getResponseEntity(AnyDisability.class);
+    }
+
+    @GetMapping(path = "/bloodGroupDropdown")
+    public ResponseEntity<Object> getBloodGroupDropdown() {
+        return dropdownUtil.getResponseEntity(BloodGroup.class);
+    }
+
+    @GetMapping(path = "/employeeCategoryDropdown")
+    public ResponseEntity<Object> getEmployeeCategoryDropdown() {
+        return dropdownUtil.getResponseEntity(EmployeeCategory.class);
+    }
+
+    @GetMapping(path = "/employeeDepartmentDropdown")
+    public ResponseEntity<Object> getEmployeeDepartmentDropdown() {
+        return dropdownUtil.getResponseEntity(EmployeeDepartment.class);
+    }
+
+    @GetMapping(path = "/genderEnumDropdown")
+    public ResponseEntity<Object> getGenderEnumDropdown() {
+        return dropdownUtil.getResponseEntity(GenderEnum.class);
+    }
+
+    @GetMapping(path = "/languageTypeDropdown")
+    public ResponseEntity<Object> getLanguageTypeDropdown() {
+        return dropdownUtil.getResponseEntity(LanguageType.class);
+    }
+
+    @GetMapping(path = "/queryTypeDropdown")
+    public ResponseEntity<Object> getQueryTypeDropdown() {
+        return dropdownUtil.getResponseEntity(QueryType.class);
+    }
+
+    @GetMapping(path = "/roleTypeEnumDropdown")
+    public ResponseEntity<Object> getRoleTypeEnumDropdown() {
+        return dropdownUtil.getResponseEntity(RoleTypeEnum.class);
+    }
+
+    @GetMapping(path = "/socialMediaCommunicationDropdown")
+    public ResponseEntity<Object> getSocialMediaCommunicationDropdown() {
+        return dropdownUtil.getResponseEntity(SocialMediaCommunication.class);
+    }
+
+    @GetMapping(path = "/solutionStatusDropdown")
+    public ResponseEntity<Object> getSolutionStatusDropdown() {
+        return dropdownUtil.getResponseEntity(SolutionStatus.class);
     }
 }

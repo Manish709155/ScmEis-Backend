@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum SocialMediaCommunicatin {
+public enum SocialMediaCommunication {
 
     FACEBOOK("Facebook"),INSTAGRAM("Instagram"),WHATSAPP("Whatsapp"),TWITEER_X("Twitter-X"),OTHERS("Others");
 
-    private final String socicalCommunication;
+    private final String socialCommunication;
 }
