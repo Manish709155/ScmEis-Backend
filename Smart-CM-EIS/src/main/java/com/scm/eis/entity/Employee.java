@@ -87,8 +87,8 @@ public class Employee extends SuperEntity implements Serializable {
     @Column(name = "employee_category")
     EmployeeCategory employeeCategory;
 
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Company.class, fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
     Company company;
 
     @Enumerated(EnumType.STRING)

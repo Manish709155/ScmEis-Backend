@@ -6,4 +6,7 @@ import java.util.Optional;
 
 public interface NationalUniqueIdentifierService {
     Optional<NationalUniqueIdentifier> findByPanNumberOrAdharNumber(String panNumber, String adharNumber);
+
+    NationalUniqueIdentifier createNationalUniqueIdentifier(NationalUniqueIdentifier nationalUniqueIdentifier);
+
 }

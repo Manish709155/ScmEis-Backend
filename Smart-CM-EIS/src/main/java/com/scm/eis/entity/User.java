@@ -72,8 +72,8 @@ public class User extends SuperEntity implements Serializable {
     private GenderEnum genderType;
 
 
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Company.class, fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
     Company company;
 
     @Enumerated(EnumType.STRING)

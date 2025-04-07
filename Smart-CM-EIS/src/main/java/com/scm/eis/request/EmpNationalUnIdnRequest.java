@@ -11,6 +11,5 @@ public class EmpNationalUnIdnRequest implements Serializable {
 
     String adharNumber;
 
-    Long employeeId;
 
 }

@@ -20,4 +20,9 @@ public class NationalUniqueIdentifierServiceImpl implements NationalUniqueIdenti
     public Optional<NationalUniqueIdentifier> findByPanNumberOrAdharNumber(String panNumber, String adharNumber) {
         return nationalUniqueIdentifierRepository.findByPanNumberOrAdharNumber(panNumber, adharNumber);
     }
+
+    @Override
+    public NationalUniqueIdentifier createNationalUniqueIdentifier(NationalUniqueIdentifier nationalUniqueIdentifier) {
+       return nationalUniqueIdentifierRepository.save(nationalUniqueIdentifier);
+    }
 }

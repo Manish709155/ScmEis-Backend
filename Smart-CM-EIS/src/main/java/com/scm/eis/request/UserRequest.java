@@ -38,5 +38,8 @@ public class UserRequest implements Serializable {
 
      Long companyId;
 
+    EmpNationalUnIdnRequest empNationalUnIdnRequest;
+
 //    CountryEnum countryEnum; TODO IN FUTURE
+
 }
