@@ -42,4 +42,6 @@ public class UserRequest implements Serializable {
 
 //    CountryEnum countryEnum; TODO IN FUTURE
 
+    AddressRequest addressRequest;
+
 }

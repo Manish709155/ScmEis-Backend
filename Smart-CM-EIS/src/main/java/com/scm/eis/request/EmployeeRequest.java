@@ -59,4 +59,6 @@ public class EmployeeRequest implements Serializable {
 
     EmpNationalUnIdnRequest empNationalUnIdnRequest;
 
+    AddressRequest addressRequest;
+
 }
