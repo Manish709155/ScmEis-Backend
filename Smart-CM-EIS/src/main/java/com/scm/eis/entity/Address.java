@@ -68,7 +68,6 @@ public class Address extends SuperEntity implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     Employee employee;
 
-
     @Enumerated(value = EnumType.STRING)
     @Column(name="address_type")
     AddressType addressType;

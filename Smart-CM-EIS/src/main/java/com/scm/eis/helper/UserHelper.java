@@ -2,6 +2,8 @@ package com.scm.eis.helper;
 
 import com.scm.eis.constant.CountryEnum;
 import com.scm.eis.constant.RoleTypeEnum;
+import com.scm.eis.constant.State;
+import com.scm.eis.entity.Address;
 import com.scm.eis.entity.Company;
 import com.scm.eis.entity.NationalUniqueIdentifier;
 import com.scm.eis.entity.User;
@@ -9,6 +11,7 @@ import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.request.UserRequest;
 import com.scm.eis.response.UserListResponse;
 import com.scm.eis.response.UserResponse;
+import com.scm.eis.service.AddressService;
 import com.scm.eis.service.CompanyService;
 import com.scm.eis.service.NationalUniqueIdentifierService;
 import com.scm.eis.service.UserService;
@@ -34,6 +37,9 @@ public class UserHelper {
 
     @Autowired
     NationalUniqueIdentifierService nationalUniqueIdentifierService;
+
+    @Autowired
+    AddressService addressService;
 
 
     public User createUser(UserRequest userRequest) throws UserCreateException {
@@ -66,6 +72,22 @@ public class UserHelper {
         newNationalUniqueIdentifier.setCreatedOn(LocalDateTime.now());
         newNationalUniqueIdentifier.setUser(newUser);
         nationalUniqueIdentifierService.createNationalUniqueIdentifier(newNationalUniqueIdentifier);
+        Address address = new Address();
+        address.setHouseNumber(userRequest.getAddressRequest().getHouseNumber());
+        address.setCity(userRequest.getAddressRequest().getCity());
+        address.setState(State.BIHAR);
+        address.setDistrict(userRequest.getAddressRequest().getDistrict());
+        address.setPostOfficeName(userRequest.getAddressRequest().getPostOfficeName());
+        address.setPinCode(userRequest.getAddressRequest().getPinCode());
+        address.setCountry(CountryEnum.INDIA);
+        address.setPoliceStation(userRequest.getAddressRequest().getPoliceStation());
+        address.setStreetName(userRequest.getAddressRequest().getStreetName());
+        address.setApartmentNumber(userRequest.getAddressRequest().getApartmentNumber());
+        address.setLandmarkNBYL(userRequest.getAddressRequest().getLandmarkNBYL());
+        address.setAddressType(userRequest.getAddressRequest().getAddressType());
+        address.setUser(newUser);
+        addressService.createAddress(address);
+
         return userService.createUser(newUser);
     }
     public String   logInUser(String userEmailId,String userMobileNo,String password) {
