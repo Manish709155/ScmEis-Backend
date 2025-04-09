@@ -1,5 +1,6 @@
 package com.scm.eis.controller;
 
+import com.scm.eis.constant.SolutionStatus;
 import com.scm.eis.exception.EmployeeCreateException;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.helper.EmployeeHelper;
@@ -11,10 +12,7 @@ import com.scm.eis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rest/api/v")
@@ -36,4 +34,25 @@ public class EmployeeRestController {
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("findByEmployeeId")
+    public ResponseEntity<Object> findById(@RequestParam Long id){
+        try{
+            return new ResponseEntity<>(employeeHelper.getresponse(employeeService.findEmployeeById(id)),  HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("getAllEmployee")
+    public ResponseEntity<Object> getAllEmployee(){
+        try{
+            return new ResponseEntity<>(employeeHelper.getAllEmployee(employeeService.getAllEmployee()),  HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
