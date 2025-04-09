@@ -68,6 +68,6 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     String queryInvalidReason;
 
     @Column(name="service_priority")
-    String servicePiority;
+    String servicePriority;
 
 }
