@@ -20,7 +20,7 @@ public class CompanyRestController {
     CompanyHelper helper;
 
     @PostMapping("create/company")
-    public ResponseEntity<Object> creatCompany(@RequestBody CompanyRequest request){
+    public ResponseEntity<Object> createCompany(@RequestBody CompanyRequest request){
 
         try
         {
@@ -34,12 +34,23 @@ public class CompanyRestController {
 
 
 
-    @GetMapping("/findCompanyById")
+    @GetMapping("/findByCompanyId")
     public ResponseEntity<Object> getResponse(@RequestParam  Long companyId){
 
         try
         {
             return  new ResponseEntity<>(helper.getCompanyResponse(companyId), HttpStatus.OK);// /execute
+        }
+        catch (RuntimeException exception){
+            return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);// exception
+        }
+    }
+    @GetMapping("/companies")
+    public ResponseEntity<Object> getResponse(){
+
+        try
+        {
+            return  new ResponseEntity<>(helper.getCompanyList(companyService.getAllCompanies()), HttpStatus.OK);// /execute
         }
         catch (RuntimeException exception){
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);// exception
