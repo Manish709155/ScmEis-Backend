@@ -1,25 +1,25 @@
-package com.scm.eis.request;
+package com.scm.eis.response;
 
-import com.scm.eis.constant.*;
-import com.scm.eis.entity.Employee;
-import com.scm.eis.entity.User;
-import jakarta.persistence.*;
+
+import com.scm.eis.constant.AddressType;
+import com.scm.eis.constant.City;
+import com.scm.eis.constant.District;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class AddressRequest implements Serializable {
+public class AddressResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    Long Id;
+    Long id;
 
     String houseNumber;
 
@@ -40,5 +40,4 @@ public class AddressRequest implements Serializable {
     String landmarkNBYL;
 
     AddressType addressType;
-
 }
