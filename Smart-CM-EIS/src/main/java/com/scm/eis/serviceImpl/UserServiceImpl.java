@@ -6,6 +6,7 @@ import com.scm.eis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,16 +27,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserByEmailIdOrMobileNo(String userEmailId, String userMobileNo) {
-        return userRepository.findUserByEmailIdOrMobileNo(userEmailId,userMobileNo);
+        return userRepository.findUserByEmailIdOrMobileNo(userEmailId, userMobileNo);
     }
 
     @Override
     public Optional<User> findUserByEmailIdOrMobileNoAndPassword(String userEmailId, String userMobileNo, String password) {
-       return userRepository.findUserByEmailIdOrMobileNoAndPassword(userEmailId,userMobileNo,password);
+        return userRepository.findUserByEmailIdOrMobileNoAndPassword(userEmailId, userMobileNo, password);
     }
 
     @Override
     public Optional<User> findByUserOtp(String otp) {
         return userRepository.findByUserOtp(otp);
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+
 }
+

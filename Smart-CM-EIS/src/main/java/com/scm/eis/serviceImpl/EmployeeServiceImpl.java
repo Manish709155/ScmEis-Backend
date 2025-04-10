@@ -1,4 +1,32 @@
 package com.scm.eis.serviceImpl;
 
-public class EmployeeServiceImpl {
+import com.scm.eis.entity.Employee;
+import com.scm.eis.repository.EmployeeRepository;
+import com.scm.eis.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+    @Override
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee) ;
+    }
+
+    @Override
+    public Optional<Employee> findEmployeeById(Long employeeId) {
+        return employeeRepository.findById(employeeId);
+    }
+
+    @Override
+    public List<Employee> getAllEmployee() {
+        return employeeRepository.findAll();
+    }
 }

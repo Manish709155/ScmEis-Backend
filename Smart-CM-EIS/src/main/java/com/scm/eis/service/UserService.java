@@ -2,6 +2,7 @@ package com.scm.eis.service;
 
 import com.scm.eis.entity.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -16,5 +17,6 @@ public interface UserService {
 
     Optional<User> findByUserOtp(String otp);
 
+    List<User> getAllUsers();
 
 }

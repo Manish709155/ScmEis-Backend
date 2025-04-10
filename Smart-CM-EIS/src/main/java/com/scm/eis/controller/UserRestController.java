@@ -1,5 +1,6 @@
 package com.scm.eis.controller;
 
+import com.scm.eis.entity.User;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.helper.UserHelper;
 import com.scm.eis.request.*;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/api/v")
@@ -20,7 +23,7 @@ public class UserRestController {
     UserHelper userHelper;
 
     @PostMapping("create/user")
-    public ResponseEntity<Object> creatCompany(@RequestBody UserRequest request){
+    public ResponseEntity<Object> createCompany(@RequestBody UserRequest request){
         try
         {
             return  new ResponseEntity<>(userService.createUser(userHelper.createUser(request)).getId(), HttpStatus.OK);
@@ -69,4 +72,26 @@ public class UserRestController {
             return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("findByUserId")
+    public ResponseEntity<Object> findById(@RequestParam Long id){
+        try{
+            return new ResponseEntity<>(userHelper.getresponse(userService.findUserById(id)),  HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("getAllUsers")
+    public ResponseEntity<Object> getAllUsers(){
+        try{
+            return new ResponseEntity<>(userHelper.getAllUsers(userService.getAllUsers()),  HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 }

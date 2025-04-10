@@ -29,7 +29,7 @@ public class NationalUniqueIdentifier extends SuperEntity implements Serializabl
     @Column(name="adhar_number")
     String adharNumber;
 
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     User user;
 

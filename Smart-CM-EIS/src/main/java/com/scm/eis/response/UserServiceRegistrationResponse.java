@@ -1,21 +1,17 @@
-package com.scm.eis.request;
+package com.scm.eis.response;
 
 import com.scm.eis.constant.*;
-import com.scm.eis.entity.Employee;
-import com.scm.eis.entity.User;
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserServiceRegistrationRequest implements Serializable {
+public class UserServiceRegistrationResponse {
+
+    Long id;
 
     QueryType queryType;
 
@@ -36,8 +32,4 @@ public class UserServiceRegistrationRequest implements Serializable {
     String queryInvalidReason;
 
     String servicePriority;
-
-    EmpNationalUnIdnRequest empNationalUnIdnRequest;
-
-    Long companyId;
 }

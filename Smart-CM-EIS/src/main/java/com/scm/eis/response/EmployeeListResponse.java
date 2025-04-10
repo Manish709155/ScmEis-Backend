@@ -1,25 +1,23 @@
-package com.scm.eis.request;
+package com.scm.eis.response;
 
 import com.scm.eis.constant.*;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Size;
+import com.scm.eis.request.AddressRequest;
+import com.scm.eis.request.EmpNationalUnIdnRequest;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+public class EmployeeListResponse {
 
-public class EmployeeRequest implements Serializable {
-
-    static final long serialVersionUID = 1L;
+    Long id;
 
     String firstName;
 
@@ -60,5 +58,4 @@ public class EmployeeRequest implements Serializable {
     EmpNationalUnIdnRequest empNationalUnIdnRequest;
 
     AddressRequest addressRequest;
-
 }
