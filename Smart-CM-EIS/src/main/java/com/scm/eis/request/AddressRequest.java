@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AddressRequest implements Serializable {
+    Long id;
     String houseNumber;
     City city;
     District district;
