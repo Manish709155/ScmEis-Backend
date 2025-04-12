@@ -99,5 +99,7 @@ public class Employee extends SuperEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
     List<UserServiceRegistration> userServiceRegistrations;
 
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "employee_level")
+    EmployeeLevel employeeLevel;
 }

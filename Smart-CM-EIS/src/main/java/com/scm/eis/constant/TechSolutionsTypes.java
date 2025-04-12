@@ -17,7 +17,7 @@ public enum TechSolutionsTypes {
     AI_MAINTENANCE("AI-based predictive maintenance helps detect and prevent power failures."),
     EV_CHARGING("Electric vehicle charging station networks provide real-time availability and booking."),
     HOME_ENERGY_MANAGEMENT("IoT-based systems help consumers optimize their home energy usage."),
-    AI_CHATBOTS("AI-powered virtual assistants provide instant support for customer queries.");
-
+    AI_CHATBOTS("AI-powered virtual assistants provide instant support for customer queries."),
+    OPTION_NOT_AVAILABLE(String.valueOf(""));
     private final String query;
 }

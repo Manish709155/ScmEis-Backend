@@ -16,5 +16,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByUserOtp(String otp);
 
+    User findByActiveTrueAndConsumerId(String consumerId);
+
 
 }

@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
+    public User findByActiveTrueAndConsumerId(String consumerId) {
+        return userRepository.findByActiveTrueAndConsumerId(consumerId);
+    }
+
 
 }
 

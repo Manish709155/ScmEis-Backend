@@ -63,6 +63,7 @@ public class EmployeeHelper {
         employee.setBloodGroup(request.getBloodGroup());
         employee.setEmployeeDepartment(request.getEmployeeDepartment());
         employee.setEmployeeCategory(request.getEmployeeCategory());
+        employee.setEmployeeLevel(request.getEmployeeLevel());
         employee.setCompany(company);
         employee.setCountryEnum(request.getCountryEnum());
         employee.setCreatedOn(LocalDateTime.now());

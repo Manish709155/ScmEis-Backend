@@ -23,10 +23,6 @@ public class UserServiceRegistrationRequest implements Serializable {
 
     TechSolutionsTypes techSolutionsTypes;
 
-    String ticketNumber;
-
-    String serviceNumber;
-
     SolutionStatus solutionStatus;
 
     SupportChannel supportChannel;
@@ -37,7 +33,16 @@ public class UserServiceRegistrationRequest implements Serializable {
 
     String servicePriority;
 
-    EmpNationalUnIdnRequest empNationalUnIdnRequest;
-
     Long companyId;
+
+    EscalationPriority escalationPriority;
+
+    QueryUnder queryUnder;
+
+    String optionNotAvailable;
+
+    EmployeeLevel employeeLevel;
+
+    String consumerId;
+
 }

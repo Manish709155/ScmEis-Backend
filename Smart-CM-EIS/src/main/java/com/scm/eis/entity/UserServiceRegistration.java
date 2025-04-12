@@ -67,7 +67,17 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Lob
     String queryInvalidReason;
 
-    @Column(name="service_priority")
-    String servicePriority;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "escalation_priority")
+    EscalationPriority  escalationPriority;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "query_under")
+    QueryUnder queryUnder;
+
+    @Column(name = "option_not_available", columnDefinition = "TEXT")
+    @Lob
+    String optionNotAvailable;
+
 
 }

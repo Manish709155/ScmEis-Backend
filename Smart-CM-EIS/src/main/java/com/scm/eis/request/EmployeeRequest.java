@@ -61,4 +61,6 @@ public class EmployeeRequest implements Serializable {
 
     AddressRequest addressRequest;
 
+    EmployeeLevel employeeLevel;
+
 }
