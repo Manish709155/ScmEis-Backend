@@ -92,6 +92,18 @@ public class UserRestController {
         }
     }
 
+    @PostMapping("update/user")
+    public ResponseEntity<Object> updateUser(@RequestBody UserUpdateRequest request){
+        try
+        {
+            userHelper.updateUserContact(request).getId();
+            return new ResponseEntity<>("EmailId and mobile number updated successfully.", HttpStatus.OK);
+        }
+        catch (RuntimeException exception){
+            return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 
 }

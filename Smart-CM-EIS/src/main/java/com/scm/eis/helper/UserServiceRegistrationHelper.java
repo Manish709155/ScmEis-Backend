@@ -34,17 +34,10 @@ public class UserServiceRegistrationHelper {
 
     public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws UserServiceRegistrationCreateException{
         Company company = companyService.findCompanyById(userServiceRegistrationRequest.getCompanyId());
-//
-//        Optional<NationalUniqueIdentifier> nationalUniqueIdentifier = nationalUniqueIdentifierService
-//                .findByPanNumberOrAdharNumber(
-//                        userServiceRegistrationRequest.getEmpNationalUnIdnRequest().getPanNumber(),
-//                        userServiceRegistrationRequest.getEmpNationalUnIdnRequest().getAdharNumber()
-//                );
-//        if (nationalUniqueIdentifier.isPresent()) {
-//            throw new UserServiceRegistrationCreateException();
-//        }
-//        NationalUniqueIdentifier newNationalUniqueIdentifier = new NationalUniqueIdentifier();
+        Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory.TECHNICAL,userServiceRegistrationRequest.getEmployeeLevel());
+        Employee employee2 = employeeService.findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory.NONTECHNICAL,userServiceRegistrationRequest.getEmployeeLevel());
         UserServiceRegistration userServiceRegistration = new UserServiceRegistration();
+
         if(userServiceRegistrationRequest.getQueryType()== QueryType.INVALID){
             userServiceRegistration.setQueryInvalidReason(userServiceRegistrationRequest.getQueryInvalidReason());
             userServiceRegistration.setQueryType(QueryType.INVALID);
@@ -52,40 +45,46 @@ public class UserServiceRegistrationHelper {
         else{
             userServiceRegistration.setQueryType(QueryType.VALID);
         }
-        Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory.TECHNICAL,userServiceRegistrationRequest.getEmployeeLevel());
         if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_ONE)){
             userServiceRegistration.setTechSolutionsTypes(userServiceRegistrationRequest.getTechSolutionsTypes());
             userServiceRegistration.setEscalationPriority(EscalationPriority.VERY_HIGH);
-            userServiceRegistration.setEmployee(employee);
         }
         else if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_TWO)){
             userServiceRegistration.setTechSolutionsTypes(userServiceRegistrationRequest.getTechSolutionsTypes());
             userServiceRegistration.setEscalationPriority(EscalationPriority.HIGH);
-            userServiceRegistration.setEmployee(employee);
         }
         else if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_THREE)){
             userServiceRegistration.setTechSolutionsTypes(userServiceRegistrationRequest.getTechSolutionsTypes());
             userServiceRegistration.setEscalationPriority(EscalationPriority.MEDIUM);
-            userServiceRegistration.setEmployee(employee);
         }
         else if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_FOUR)){
             userServiceRegistration.setTechSolutionsTypes(userServiceRegistrationRequest.getTechSolutionsTypes());
             userServiceRegistration.setEscalationPriority(EscalationPriority.LOW);
-            userServiceRegistration.setEmployee(employee);
         }
         else if (userServiceRegistrationRequest.getTechSolutionsTypes()== TechSolutionsTypes.OPTION_NOT_AVAILABLE && employee.getEmployeeLevel().equals(userServiceRegistrationRequest.getEmployeeLevel())){
             userServiceRegistration.setOptionNotAvailable(userServiceRegistrationRequest.getOptionNotAvailable());
             userServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
-            userServiceRegistration.setEmployee(employee);
         }
-        Employee employee2 = employeeService.findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory.NONTECHNICAL,userServiceRegistrationRequest.getEmployeeLevel());
-        if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.NON_TECHNICAL){
+        //
+        if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.NON_TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_ONE)){
             userServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
-            userServiceRegistration.setEmployee(employee2);
+            userServiceRegistration.setEscalationPriority(EscalationPriority.VERY_HIGH);
         }
-        else if (userServiceRegistrationRequest.getNonTechSolutionsTypes()== NonTechSolutionsTypes.OPTION_NOT_AVAILABLE){
+        else if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.NON_TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_TWO)){
+            userServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
+            userServiceRegistration.setEscalationPriority(EscalationPriority.HIGH);
+        }
+        else if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.NON_TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_THREE)){
+            userServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
+            userServiceRegistration.setEscalationPriority(EscalationPriority.MEDIUM);
+        }
+        else if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.NON_TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_FOUR)){
+            userServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
+            userServiceRegistration.setEscalationPriority(EscalationPriority.LOW);
+        }
+        else if (userServiceRegistrationRequest.getTechSolutionsTypes()== TechSolutionsTypes.OPTION_NOT_AVAILABLE && employee.getEmployeeLevel().equals(userServiceRegistrationRequest.getEmployeeLevel())){
             userServiceRegistration.setOptionNotAvailable(userServiceRegistrationRequest.getOptionNotAvailable());
-            userServiceRegistration.setEmployee(employee2);
+            userServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
         }
         userServiceRegistration.setTicketNumber(CommonUtil.generateTicketNumber());
         userServiceRegistration.setServiceNumber(CommonUtil.generateServiceNumber());
@@ -94,6 +93,8 @@ public class UserServiceRegistrationHelper {
         userServiceRegistration.setLanguage(userServiceRegistrationRequest.getLanguage());
         userServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
         userServiceRegistration.setUser(userService.findByActiveTrueAndConsumerId(userServiceRegistrationRequest.getConsumerId()));
+        userServiceRegistration.setEmployee(employee);
+        userServiceRegistration.setEmployee(employee2);
         return userServiceRegistrationService.createUserServiceRegistration(userServiceRegistration);
     }
 }

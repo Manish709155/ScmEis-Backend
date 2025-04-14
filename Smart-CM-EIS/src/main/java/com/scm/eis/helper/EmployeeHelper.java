@@ -4,7 +4,9 @@ import com.scm.eis.constant.CountryEnum;
 import com.scm.eis.constant.State;
 import com.scm.eis.entity.*;
 import com.scm.eis.exception.EmployeeCreateException;
+import com.scm.eis.repository.EmployeeRepository;
 import com.scm.eis.request.EmployeeRequest;
+import com.scm.eis.request.EmployeeUpdateRequest;
 import com.scm.eis.response.EmployeeListResponse;
 import com.scm.eis.response.EmployeeResponse;
 import com.scm.eis.service.AddressService;
@@ -124,5 +126,23 @@ public class EmployeeHelper {
         } );
         return responses;
     }
+
+    public Employee updateEmployeeContact(EmployeeUpdateRequest request) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(request.getId());
+
+        if (optionalEmployee.isEmpty()) {
+            throw new RuntimeException("Employee not found with ID: " + request.getId());
+        }
+
+        Employee employee = optionalEmployee.get();
+        employee.setPersonalEmailId(request.getPersonalEmailId());
+        employee.setMobileNumber(request.getMobileNumber());
+
+        return employeeRepository.save(employee);
+
+    }
+
+    @Autowired
+    EmployeeRepository employeeRepository;
 
 }

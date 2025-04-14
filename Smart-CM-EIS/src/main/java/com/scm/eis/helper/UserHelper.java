@@ -8,7 +8,9 @@ import com.scm.eis.entity.Company;
 import com.scm.eis.entity.NationalUniqueIdentifier;
 import com.scm.eis.entity.User;
 import com.scm.eis.exception.UserCreateException;
+import com.scm.eis.repository.UserRepository;
 import com.scm.eis.request.UserRequest;
+import com.scm.eis.request.UserUpdateRequest;
 import com.scm.eis.response.UserListResponse;
 import com.scm.eis.response.UserResponse;
 import com.scm.eis.service.AddressService;
@@ -158,6 +160,23 @@ public class UserHelper {
         } );
         return responses;
     }
+
+    public User updateUserContact(UserUpdateRequest request) {
+        Optional<User> optionalUser = userRepository.findById(request.getId());
+
+        if (optionalUser.isEmpty()) {
+            throw new RuntimeException("User not found with ID: " + request.getId());
+        }
+
+        User user = optionalUser.get();
+        user.setEmailId(request.getEmailId());
+        user.setMobileNo(request.getMobileNo());
+
+        return userRepository.save(user);
+    }
+
+    @Autowired
+    UserRepository userRepository;
 
 
 }

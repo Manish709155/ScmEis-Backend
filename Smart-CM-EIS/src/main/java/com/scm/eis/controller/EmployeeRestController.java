@@ -6,6 +6,7 @@ import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.helper.EmployeeHelper;
 import com.scm.eis.helper.UserHelper;
 import com.scm.eis.request.EmployeeRequest;
+import com.scm.eis.request.EmployeeUpdateRequest;
 import com.scm.eis.request.UserRequest;
 import com.scm.eis.service.EmployeeService;
 import com.scm.eis.service.UserService;
@@ -52,6 +53,18 @@ public class EmployeeRestController {
         }
         catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("update/employee")
+    public ResponseEntity<Object> updateEmployee(@RequestBody EmployeeUpdateRequest request){
+        try
+        {
+            employeeHelper.updateEmployeeContact(request).getId();
+            return new ResponseEntity<>("EmailId and mobile number updated successfully.", HttpStatus.OK);
+        }
+        catch (RuntimeException exception){
+            return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
