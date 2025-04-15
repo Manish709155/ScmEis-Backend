@@ -11,4 +11,7 @@ public interface UserServiceRegistrationService {
     public UserServiceRegistration createUserServiceRegistration(UserServiceRegistration userServiceRegistration);
 
     public Optional<UserServiceRegistration> findByTicketNumberAndActiveAndInSolutionStatusInList(String ticketNumber, boolean active, List<SolutionStatus> solutionStatuses);
+
+    public UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
 }
+

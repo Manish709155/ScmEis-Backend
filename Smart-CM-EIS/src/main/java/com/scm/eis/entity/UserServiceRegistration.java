@@ -79,5 +79,9 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Lob
     String optionNotAvailable;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "query_assign_to_employee_department")
+    EmployeeDepartment queryAssignToEmployeeDepartment;
+
 
 }

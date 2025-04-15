@@ -27,5 +27,9 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
         return userServiceRegistrationRepository.findByTicketNumberAndActiveAndInSolutionStatusInList(ticketNumber, Boolean.TRUE, Arrays.asList(SolutionStatus.CREATED, SolutionStatus.ON_HOLD, SolutionStatus.SUBMITTED, SolutionStatus.PENDING));
     }
 
-    ;
+    @Override
+    public UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber) {
+        return userServiceRegistrationRepository.findByTicketNumberAndActiveTrue(ticketNumber);
+    }
+
 }

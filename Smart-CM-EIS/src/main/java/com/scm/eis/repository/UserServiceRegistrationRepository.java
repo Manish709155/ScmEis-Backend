@@ -17,6 +17,6 @@ public interface UserServiceRegistrationRepository extends JpaRepository<UserSer
             @Param("active") boolean active,
             @Param("solutionStatuses") List<SolutionStatus> solutionStatuses);
 
-
+    public UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
 
 }

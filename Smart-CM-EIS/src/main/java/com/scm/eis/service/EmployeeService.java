@@ -1,6 +1,7 @@
 package com.scm.eis.service;
 
 import com.scm.eis.constant.EmployeeCategory;
+import com.scm.eis.constant.EmployeeDepartment;
 import com.scm.eis.constant.EmployeeLevel;
 import com.scm.eis.entity.Employee;
 
@@ -16,4 +17,6 @@ public interface EmployeeService {
     List<Employee> getAllEmployee();
 
     Employee findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel);
+
+    Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment);
 }

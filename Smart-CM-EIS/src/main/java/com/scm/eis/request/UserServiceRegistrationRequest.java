@@ -45,4 +45,8 @@ public class UserServiceRegistrationRequest implements Serializable {
 
     String consumerId;
 
+    String ticketNumber;
+
+    EmployeeDepartment queryAssignToEmployeeDepartment;
+
 }

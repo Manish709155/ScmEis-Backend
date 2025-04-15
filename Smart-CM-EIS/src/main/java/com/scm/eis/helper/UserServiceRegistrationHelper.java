@@ -1,17 +1,19 @@
 package com.scm.eis.helper;
 
 import com.scm.eis.constant.*;
-import com.scm.eis.entity.Company;
-import com.scm.eis.entity.Employee;
-import com.scm.eis.entity.NationalUniqueIdentifier;
-import com.scm.eis.entity.UserServiceRegistration;
+import com.scm.eis.entity.*;
+import com.scm.eis.exception.QueryCreatedException;
+import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.exception.UserServiceRegistrationCreateException;
 import com.scm.eis.request.UserServiceRegistrationRequest;
+import com.scm.eis.response.UserQueryStatus;
+import com.scm.eis.response.UserResponse;
 import com.scm.eis.service.*;
 import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Component
@@ -21,21 +23,19 @@ public class UserServiceRegistrationHelper {
     UserServiceRegistrationService userServiceRegistrationService;
 
     @Autowired
-    NationalUniqueIdentifierService nationalUniqueIdentifierService;
-
-    @Autowired
-    CompanyService companyService;
-
-    @Autowired
     EmployeeService employeeService;
 
     @Autowired
     UserService userService;
 
-    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws UserServiceRegistrationCreateException{
-        Company company = companyService.findCompanyById(userServiceRegistrationRequest.getCompanyId());
+    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws  QueryCreatedException {
         Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory.TECHNICAL,userServiceRegistrationRequest.getEmployeeLevel());
         Employee employee2 = employeeService.findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory.NONTECHNICAL,userServiceRegistrationRequest.getEmployeeLevel());
+        Employee queryAssignedEmployeeDepartment = employeeService.findByEmployeeDepartmentAndActiveTrue(userServiceRegistrationRequest.getQueryAssignToEmployeeDepartment());
+        Optional<UserServiceRegistration> userServiceRegistrationOptional = userServiceRegistrationService.findByTicketNumberAndActiveAndInSolutionStatusInList(userServiceRegistrationRequest.getTicketNumber(), Boolean.TRUE, Arrays.asList(userServiceRegistrationRequest.getSolutionStatus()));
+        if(userServiceRegistrationOptional.isPresent()){
+            throw new QueryCreatedException(userServiceRegistrationRequest.getSolutionStatus()) ;
+        }
         UserServiceRegistration userServiceRegistration = new UserServiceRegistration();
 
         if(userServiceRegistrationRequest.getQueryType()== QueryType.INVALID){
@@ -65,7 +65,7 @@ public class UserServiceRegistrationHelper {
             userServiceRegistration.setOptionNotAvailable(userServiceRegistrationRequest.getOptionNotAvailable());
             userServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
         }
-        //
+
         if(userServiceRegistrationRequest.getQueryUnder() == QueryUnder.NON_TECHNICAL && employee.getEmployeeLevel().equals(EmployeeLevel.LEVEL_ONE)){
             userServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
             userServiceRegistration.setEscalationPriority(EscalationPriority.VERY_HIGH);
@@ -95,6 +95,15 @@ public class UserServiceRegistrationHelper {
         userServiceRegistration.setUser(userService.findByActiveTrueAndConsumerId(userServiceRegistrationRequest.getConsumerId()));
         userServiceRegistration.setEmployee(employee);
         userServiceRegistration.setEmployee(employee2);
+        userServiceRegistration.setQueryAssignToEmployeeDepartment(queryAssignedEmployeeDepartment.getEmployeeDepartment());
         return userServiceRegistrationService.createUserServiceRegistration(userServiceRegistration);
+    }
+
+    public UserQueryStatus getUserQueryProgress(String ticketNumber){
+        UserServiceRegistration userServiceRegistration = userServiceRegistrationService.findByTicketNumberAndActiveTrue(ticketNumber);
+        return UserQueryStatus.builder()
+                .id(userServiceRegistration.getId())
+                .userQueryUpdatedStatus(userServiceRegistration.getSolutionStatus())
+                .build();
     }
 }

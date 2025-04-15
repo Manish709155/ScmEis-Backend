@@ -1,6 +1,7 @@
 package com.scm.eis.serviceImpl;
 
 import com.scm.eis.constant.EmployeeCategory;
+import com.scm.eis.constant.EmployeeDepartment;
 import com.scm.eis.constant.EmployeeLevel;
 import com.scm.eis.entity.Employee;
 import com.scm.eis.repository.EmployeeRepository;
@@ -35,6 +36,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel) {
         return employeeRepository.findByEmployeeCategoryAndEmployeeLevel(employeeCategory,employeeLevel);
+    }
+
+    @Override
+    public Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment) {
+        return employeeRepository.findByEmployeeDepartmentAndActiveTrue(employeeDepartment);
     }
 
 
