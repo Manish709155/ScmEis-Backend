@@ -1,5 +1,6 @@
 package com.scm.eis.util;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +20,8 @@ public class CommonUtil {
         return value != null && value > 0;
     }
 
-    public static boolean isEmpty(String string) {
-        return StringUtils.isBlank(string);
+    public static boolean isEmpty(Object string) {
+        return ObjectUtils.isEmpty(string);
     }
 
     public static String generateConsumerId() {

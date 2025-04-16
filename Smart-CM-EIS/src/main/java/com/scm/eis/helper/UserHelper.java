@@ -1,5 +1,6 @@
 package com.scm.eis.helper;
 
+import com.scm.eis.constant.Constants;
 import com.scm.eis.constant.CountryEnum;
 import com.scm.eis.constant.RoleTypeEnum;
 import com.scm.eis.constant.State;
@@ -18,15 +19,14 @@ import com.scm.eis.service.CompanyService;
 import com.scm.eis.service.NationalUniqueIdentifierService;
 import com.scm.eis.service.UserService;
 import com.scm.eis.util.CommonUtil;
+import com.scm.eis.util.EmailSenderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class UserHelper {
@@ -42,6 +42,9 @@ public class UserHelper {
 
     @Autowired
     AddressService addressService;
+
+    @Autowired
+    EmailSenderUtil emailSenderUtil;
 
 
     public User createUser(UserRequest userRequest) throws UserCreateException {
@@ -118,6 +121,16 @@ public class UserHelper {
         Optional<User> user = userService.findUserByEmailIdOrMobileNo(userEmailId, userMobileNo);
         User usr=user.get();
         usr.setUserOtp(CommonUtil.generateOtp());
+        Map<String,Object> model = new HashMap<>();
+        model.put("otp",usr.getUserOtp());
+        model.put("name",usr.getFirstName()+" "+usr.getMiddleName()+" "+usr.getLastName());
+        new Thread() {
+            public void run() {
+                emailSenderUtil.sendEmail(usr.getEmailId(), model,
+                        Constants.VALIDATE_OTP_EMAIL_TEMPLATE, Constants.VALIDATE_OTP_SUBJECT);
+            }
+        }.start();
+
         usr.setOtpGeneratedTime(LocalTime.now());
         userService.createUser(user.get());
 
