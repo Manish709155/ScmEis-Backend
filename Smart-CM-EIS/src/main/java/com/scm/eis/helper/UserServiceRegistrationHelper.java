@@ -13,6 +13,7 @@ import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -87,6 +88,8 @@ public class UserServiceRegistrationHelper {
             userServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
         }
         userServiceRegistration.setTicketNumber(CommonUtil.generateTicketNumber());
+        userServiceRegistration.setCreatedOn(LocalDateTime.now());
+        userServiceRegistration.setQueryUnder(userServiceRegistrationRequest.getQueryUnder());
         userServiceRegistration.setServiceNumber(CommonUtil.generateServiceNumber());
         userServiceRegistration.setSolutionStatus(SolutionStatus.CREATED);
         userServiceRegistration.setSupportChannel(userServiceRegistrationRequest.getSupportChannel());
