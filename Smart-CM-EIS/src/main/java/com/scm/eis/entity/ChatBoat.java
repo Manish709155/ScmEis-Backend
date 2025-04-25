@@ -9,11 +9,11 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "chat")
+@Table(name = "chat_boat")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Chat extends SuperEntity implements Serializable {
+public class ChatBoat extends SuperEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
