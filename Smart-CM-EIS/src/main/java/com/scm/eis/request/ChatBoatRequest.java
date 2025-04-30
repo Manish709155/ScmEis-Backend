@@ -1,6 +1,7 @@
 package com.scm.eis.request;
 
 import com.scm.eis.constant.EscalationPriority;
+import com.scm.eis.constant.MessageType;
 import com.scm.eis.constant.QueryUnder;
 import com.scm.eis.constant.SolutionStatus;
 import com.scm.eis.entity.Employee;
@@ -19,10 +20,10 @@ import java.io.Serializable;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ChatBoatRequest implements Serializable {
 
-    SolutionStatus solutionStatus;
-
-    EscalationPriority escalationPriority;
-
     String userAskedQuery;
+
+    MessageType type;
+
+    String validateConsumerId;
 
 }

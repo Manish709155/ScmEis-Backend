@@ -50,6 +50,10 @@ public class ChatBoat extends SuperEntity implements Serializable {
     @Lob
     String userAskedQuery;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "message_type")
+    MessageType messageType;
+
 }
 
 

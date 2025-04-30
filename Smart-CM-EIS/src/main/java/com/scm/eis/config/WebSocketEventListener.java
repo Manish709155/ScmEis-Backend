@@ -3,7 +3,7 @@ package com.scm.eis.config;
 import com.scm.eis.constant.MessageType;
 import com.scm.eis.entity.User;
 import com.scm.eis.entity.UserServiceRegistration;
-import com.scm.eis.request.ChatMessage;
+import com.scm.eis.request.ChatBoatRequest;
 import com.scm.eis.service.UserService;
 import com.scm.eis.service.UserServiceRegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -38,11 +38,11 @@ public class WebSocketEventListener {
             fullNameBuilder.append(" ").append(user.getLastName());
             String userName = fullNameBuilder.toString();
             log.info("User connected: {}", userName);
-            var chatMessage = ChatMessage.builder()
+            var chatBoatRequest = ChatBoatRequest.builder()
                     .type(MessageType.CHAT)
                     .validateConsumerId(userName)
                     .build();
-            messagingTemplate.convertAndSend("/topic/private", chatMessage);
+            messagingTemplate.convertAndSend("/topic/private", chatBoatRequest);
         } else {
             log.warn("No user found for consumerId: {}", consumerId);
         }

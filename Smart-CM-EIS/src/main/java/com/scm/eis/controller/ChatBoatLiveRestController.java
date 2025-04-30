@@ -1,6 +1,6 @@
 package com.scm.eis.controller;
 
-import com.scm.eis.request.ChatMessage;
+import com.scm.eis.request.ChatBoatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +17,9 @@ public class ChatBoatLiveRestController {
     ChatBoatRestController chatBoatRestController;
 
     @PostMapping("/sendMessage")
-    public ResponseEntity<Object> userLogIn(@RequestBody ChatMessage chatMessage){
+    public ResponseEntity<Object> userLogIn(@RequestBody ChatBoatRequest chatBoatRequest){
         try {
-            return  new ResponseEntity<>(chatBoatRestController.sendMessage(chatMessage), HttpStatus.OK);
+            return  new ResponseEntity<>(chatBoatRestController.sendMessage(chatBoatRequest), HttpStatus.OK);
 
         } catch (Exception e) {
             return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
