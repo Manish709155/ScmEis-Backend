@@ -17,8 +17,6 @@ import java.io.Serializable;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserServiceRegistrationRequest implements Serializable {
 
-    QueryType queryType;
-
     NonTechSolutionsTypes nonTechSolutionsTypes;
 
     TechSolutionsTypes techSolutionsTypes;
@@ -29,24 +27,16 @@ public class UserServiceRegistrationRequest implements Serializable {
 
     LanguageType language;
 
-    String queryInvalidReason;
-
-    String servicePriority;
-
-    Long companyId;
-
     EscalationPriority escalationPriority;
 
     QueryUnder queryUnder;
-
-    String optionNotAvailable;
 
     EmployeeLevel employeeLevel;
 
     String consumerId;
 
-    String ticketNumber;
+    EmployeeCategory employeeCategory;
 
-    EmployeeDepartment queryAssignToEmployeeDepartment;
+    String employeeSapCard;
 
 }

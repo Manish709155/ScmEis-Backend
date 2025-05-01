@@ -14,6 +14,7 @@ public class CommonUtil {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int TICKET_NUMBER_LENGTH = 12;
     private static final int SERVICE_NUMBER_LENGTH = 16;
+    private static final int EMPLOYEE_SAP_LENGTH = 8;
     private static final SecureRandom RANDOM = new SecureRandom();
 
     public static boolean isValid(Long value) {
@@ -37,6 +38,12 @@ public class CommonUtil {
     }
     public static String generateServiceNumber() {
        return IntStream.range(0, SERVICE_NUMBER_LENGTH)
+                .mapToObj(i -> String.valueOf(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length()))))
+                .collect(Collectors.joining());
+    }
+
+    public static String generateEmployeeSapId() {
+        return IntStream.range(0, EMPLOYEE_SAP_LENGTH)
                 .mapToObj(i -> String.valueOf(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length()))))
                 .collect(Collectors.joining());
     }

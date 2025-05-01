@@ -34,8 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel) {
-        return employeeRepository.findByEmployeeCategoryAndEmployeeLevel(employeeCategory,employeeLevel);
+    public Employee findByEmployeeCategoryAndEmployeeLevelAndSapCard(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel,String sapCard) {
+        return employeeRepository.findByEmployeeCategoryAndEmployeeLevelAndSapCard(employeeCategory,employeeLevel,sapCard);
     }
 
     @Override

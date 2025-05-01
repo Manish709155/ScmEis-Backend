@@ -16,7 +16,7 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployee();
 
-    Employee findByEmployeeCategoryAndEmployeeLevel(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel);
+    Employee findByEmployeeCategoryAndEmployeeLevelAndSapCard(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel,String sapCard);
 
     Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment);
 }

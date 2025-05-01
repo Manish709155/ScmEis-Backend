@@ -27,8 +27,6 @@ public class EmployeeRequest implements Serializable {
 
     String lastName;
 
-    String sapCard;
-
     BigDecimal salary;
 
     LocalDateTime joiningDate;

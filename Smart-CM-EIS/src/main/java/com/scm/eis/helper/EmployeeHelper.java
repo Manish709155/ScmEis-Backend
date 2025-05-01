@@ -12,6 +12,7 @@ import com.scm.eis.response.EmployeeResponse;
 import com.scm.eis.service.AddressService;
 import com.scm.eis.service.CompanyService;
 import com.scm.eis.service.NationalUniqueIdentifierService;
+import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,7 +53,7 @@ public class EmployeeHelper {
         employee.setFirstName(request.getFirstName());
         employee.setMiddleName(request.getMiddleName());
         employee.setLastName(request.getLastName());
-        employee.setSapCard(request.getSapCard());
+        employee.setSapCard(CommonUtil.generateEmployeeSapId());
         employee.setSalary(request.getSalary());
         employee.setJoiningDate(request.getJoiningDate());
         employee.setDob(request.getDob());

@@ -24,10 +24,6 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "query_type")
-    QueryType queryType;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "non_tech_solutions_types")
     NonTechSolutionsTypes nonTechSolutionsTypes;
 
@@ -63,10 +59,6 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @JoinColumn(name = "employee_id")
     Employee employee;
 
-    @Column(name = "query_invalid_reason", columnDefinition = "TEXT")
-    @Lob
-    String queryInvalidReason;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "escalation_priority")
     EscalationPriority  escalationPriority;
@@ -75,13 +67,9 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Column(name = "query_under")
     QueryUnder queryUnder;
 
-    @Column(name = "option_not_available", columnDefinition = "TEXT")
-    @Lob
-    String optionNotAvailable;
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "query_assign_to_employee_department")
-    EmployeeDepartment queryAssignToEmployeeDepartment;
+    @Column(name = "employee_level")
+    EmployeeLevel employeeLevel;
 
 
 }

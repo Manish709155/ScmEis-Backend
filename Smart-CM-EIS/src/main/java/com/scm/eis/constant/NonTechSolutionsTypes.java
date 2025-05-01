@@ -17,7 +17,6 @@ public enum NonTechSolutionsTypes {
     RURAL_ELECTRIFICATION("Projects aimed at expanding electricity access to remote areas."),
     SUBSIDIES("Financial aid programs offer discounted electricity rates for eligible customers."),
     TARIFF_ADVISORY("Guidance on selecting the best electricity tariff plans for different needs."),
-    LOAD_SHEDDING_SCHEDULES("Planned power outage schedules are communicated to affected areas."),
-    OPTION_NOT_AVAILABLE(String.valueOf(""));
+    LOAD_SHEDDING_SCHEDULES("Planned power outage schedules are communicated to affected areas.");
      final String query;
 }
