@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface UserServiceRegistrationService {
 
-    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistration userServiceRegistration);
+    UserServiceRegistration createUserServiceRegistration(UserServiceRegistration userServiceRegistration);
 
-    public Optional<UserServiceRegistration> findByTicketNumberAndActiveAndInSolutionStatusInList(String ticketNumber, boolean active, List<SolutionStatus> solutionStatuses);
+    Optional<UserServiceRegistration> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId);
 
-    public UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
+    UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
 }
 

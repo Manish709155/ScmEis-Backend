@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChatBoatServiceImpl implements ChatBoatService {
@@ -25,6 +26,11 @@ public class ChatBoatServiceImpl implements ChatBoatService {
     @Override
     public ChatBoat findByUserIdAndActiveTrue(Long userId) {
         return chatBoatRepository.findByUserIdAndActiveTrue(userId);
+    }
+
+    @Override
+    public Optional<ChatBoat> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId) {
+        return chatBoatRepository.findByConsumerIdAndActiveTrueAndSolutionStatus(consumerId);
     }
 
 }

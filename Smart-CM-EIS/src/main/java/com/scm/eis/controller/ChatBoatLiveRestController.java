@@ -19,7 +19,8 @@ public class ChatBoatLiveRestController {
     @PostMapping("/sendMessage")
     public ResponseEntity<Object> userLogIn(@RequestBody ChatBoatRequest chatBoatRequest){
         try {
-            return  new ResponseEntity<>(chatBoatRestController.sendMessage(chatBoatRequest), HttpStatus.OK);
+            chatBoatRestController.sendMessage(chatBoatRequest);
+            return  new ResponseEntity<>("You query has been registered successfully as soon as possible technical team will connect with you.", HttpStatus.OK);
 
         } catch (Exception e) {
             return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

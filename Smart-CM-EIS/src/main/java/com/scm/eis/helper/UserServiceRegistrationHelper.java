@@ -2,6 +2,7 @@ package com.scm.eis.helper;
 
 import com.scm.eis.constant.*;
 import com.scm.eis.entity.*;
+import com.scm.eis.exception.EmployeeCreateException;
 import com.scm.eis.exception.QueryCreatedException;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.exception.UserServiceRegistrationCreateException;
@@ -29,24 +30,30 @@ public class UserServiceRegistrationHelper {
     @Autowired
     UserService userService;
 
-    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws  QueryCreatedException {
+    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws QueryCreatedException{
         Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevelAndSapCard(userServiceRegistrationRequest.getEmployeeCategory(),userServiceRegistrationRequest.getEmployeeLevel(),userServiceRegistrationRequest.getEmployeeSapCard());
-        UserServiceRegistration userServiceRegistration = new UserServiceRegistration();
-        userServiceRegistration.setEmployee(employee);
-        userServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
-        userServiceRegistration.setEmployeeLevel(employee.getEmployeeLevel());
-        userServiceRegistration.setTechSolutionsTypes(userServiceRegistration.getTechSolutionsTypes());
-        userServiceRegistration.setTicketNumber(CommonUtil.generateTicketNumber());
-        userServiceRegistration.setCreatedOn(LocalDateTime.now());
-        userServiceRegistration.setQueryUnder(userServiceRegistrationRequest.getQueryUnder());
-        userServiceRegistration.setServiceNumber(CommonUtil.generateServiceNumber());
-        userServiceRegistration.setSolutionStatus(SolutionStatus.CREATED);
-        userServiceRegistration.setSupportChannel(userServiceRegistrationRequest.getSupportChannel());
-        userServiceRegistration.setLanguage(userServiceRegistrationRequest.getLanguage());
-        userServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
-        userServiceRegistration.setUser(userService.findByActiveTrueAndConsumerId(userServiceRegistrationRequest.getConsumerId()));
-        userServiceRegistration.setEmployee(employee);
-        return userServiceRegistrationService.createUserServiceRegistration(userServiceRegistration);
+        Optional<UserServiceRegistration> userServiceRegistration  = userServiceRegistrationService.findByConsumerIdAndActiveTrueAndSolutionStatus(userServiceRegistrationRequest.getConsumerId());
+
+        if (userServiceRegistration.isPresent()) {
+            throw new QueryCreatedException(userServiceRegistration.get().getSolutionStatus());
+        }
+        UserServiceRegistration newUserServiceRegistration = new UserServiceRegistration();
+        newUserServiceRegistration.setEmployee(employee);
+        newUserServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
+        newUserServiceRegistration.setEmployeeLevel(employee.getEmployeeLevel());
+        newUserServiceRegistration.setTechSolutionsTypes(newUserServiceRegistration.getTechSolutionsTypes());
+        newUserServiceRegistration.setTicketNumber(CommonUtil.generateTicketNumber());
+        newUserServiceRegistration.setCreatedOn(LocalDateTime.now());
+        newUserServiceRegistration.setQueryUnder(userServiceRegistrationRequest.getQueryUnder());
+        newUserServiceRegistration.setServiceNumber(CommonUtil.generateServiceNumber());
+        newUserServiceRegistration.setSolutionStatus(SolutionStatus.CREATED);
+        newUserServiceRegistration.setSupportChannel(userServiceRegistrationRequest.getSupportChannel());
+        newUserServiceRegistration.setLanguage(userServiceRegistrationRequest.getLanguage());
+        newUserServiceRegistration.setUserAskedQuery(userServiceRegistrationRequest.getUserAskedQuery());
+        newUserServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
+        newUserServiceRegistration.setUser(userService.findByActiveTrueAndConsumerId(userServiceRegistrationRequest.getConsumerId()));
+        newUserServiceRegistration.setEmployee(employee);
+        return userServiceRegistrationService.createUserServiceRegistration(newUserServiceRegistration);
     }
 
     public UserQueryStatus getUserQueryProgress(String ticketNumber){

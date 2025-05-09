@@ -71,5 +71,8 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Column(name = "employee_level")
     EmployeeLevel employeeLevel;
 
+    @Column(name = "user_asked_query")
+    @Lob
+    String userAskedQuery;
 
 }

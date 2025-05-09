@@ -11,12 +11,8 @@ import java.util.Optional;
 
 public interface UserServiceRegistrationRepository extends JpaRepository<UserServiceRegistration, Long> {
 
-    @Query("SELECT u FROM UserServiceRegistration u WHERE u.ticketNumber = :ticketNumber AND u.active = :active AND u.solutionStatus IS NOT NULL AND u.solutionStatus IN :solutionStatuses")
-    Optional<UserServiceRegistration> findByTicketNumberAndActiveAndInSolutionStatusInList(
-            @Param("ticketNumber") String ticketNumber,
-            @Param("active") boolean active,
-            @Param("solutionStatuses") List<SolutionStatus> solutionStatuses);
+    @Query("SELECT usr FROM UserServiceRegistration usr Right JOIN User u ON usr.user.id = u.id WHERE  (u.consumerId =:consumerId AND usr.active =true AND usr.solutionStatus IN (com.scm.eis.constant.SolutionStatus.CREATED, com.scm.eis.constant.SolutionStatus.ON_HOLD,com.scm.eis.constant.SolutionStatus.IN_PROGRESS,com.scm.eis.constant.SolutionStatus.PENDING)) ")
+    Optional<UserServiceRegistration> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId);
 
-    public UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
-
+    UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
 }

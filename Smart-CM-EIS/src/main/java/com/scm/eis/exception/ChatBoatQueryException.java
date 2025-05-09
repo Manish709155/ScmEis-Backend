@@ -1,11 +1,13 @@
 package com.scm.eis.exception;
 
+import com.scm.eis.constant.SolutionStatus;
+
 public class ChatBoatQueryException extends Exception {
-    private final static String Chat_Boat_Query_Exception="Your have one already query status";
+    private final static String Chat_Boat_Query_Exception="Your previous registered query has been already in";
 
-    public ChatBoatQueryException() {
+    public ChatBoatQueryException(SolutionStatus solutionStatus) {
 
-        super(getChatBoatQueryException());
+        super(getChatBoatQueryException()+" "+solutionStatus+" "+"State.");
     }
 
     public static String getChatBoatQueryException(){

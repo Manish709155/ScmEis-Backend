@@ -23,9 +23,10 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
     }
 
     @Override
-    public Optional<UserServiceRegistration> findByTicketNumberAndActiveAndInSolutionStatusInList(String ticketNumber, boolean active, List<SolutionStatus> solutionStatuses) {
-        return userServiceRegistrationRepository.findByTicketNumberAndActiveAndInSolutionStatusInList(ticketNumber, Boolean.TRUE, Arrays.asList(SolutionStatus.CREATED, SolutionStatus.ON_HOLD, SolutionStatus.SUBMITTED, SolutionStatus.PENDING));
+    public Optional<UserServiceRegistration> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId) {
+        return userServiceRegistrationRepository.findByConsumerIdAndActiveTrueAndSolutionStatus(consumerId);
     }
+
 
     @Override
     public UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber) {
