@@ -33,4 +33,9 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
         return userServiceRegistrationRepository.findByTicketNumberAndActiveTrue(ticketNumber);
     }
 
+    @Override
+    public Optional<UserServiceRegistration> findByNotificationReadActiveTrueAndConsumerId(String consumerId) {
+        return userServiceRegistrationRepository.findByActiveTrueAndNotificationReadTrueAndUserConsumerId(consumerId);
+    }
+
 }

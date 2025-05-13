@@ -13,5 +13,7 @@ public interface UserServiceRegistrationService {
     Optional<UserServiceRegistration> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId);
 
     UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
+
+    Optional<UserServiceRegistration> findByNotificationReadActiveTrueAndConsumerId(String consumerId);
 }
 

@@ -6,7 +6,9 @@ import com.scm.eis.exception.EmployeeCreateException;
 import com.scm.eis.exception.QueryCreatedException;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.exception.UserServiceRegistrationCreateException;
+import com.scm.eis.request.NotificationRequest;
 import com.scm.eis.request.UserServiceRegistrationRequest;
+import com.scm.eis.response.NotificationResponse;
 import com.scm.eis.response.UserQueryStatus;
 import com.scm.eis.response.UserResponse;
 import com.scm.eis.service.*;
@@ -62,5 +64,14 @@ public class UserServiceRegistrationHelper {
                 .id(userServiceRegistration.getId())
                 .userQueryUpdatedStatus(userServiceRegistration.getSolutionStatus())
                 .build();
+    }
+
+    public NotificationResponse getNotification(String consumerId){
+        NotificationResponse notificationResponse = new NotificationResponse();
+       Optional<UserServiceRegistration> usrSerReg= userServiceRegistrationService.findByNotificationReadActiveTrueAndConsumerId(consumerId);
+        notificationResponse.setNotificationRead(usrSerReg.get().getNotificationRead());
+        notificationResponse.setId(usrSerReg.get().getId());
+        notificationResponse.setNotificationMessage(usrSerReg.get().getSolutionStatus());
+        return notificationResponse;
     }
 }

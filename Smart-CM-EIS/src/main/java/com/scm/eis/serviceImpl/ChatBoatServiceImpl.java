@@ -33,4 +33,9 @@ public class ChatBoatServiceImpl implements ChatBoatService {
         return chatBoatRepository.findByConsumerIdAndActiveTrueAndSolutionStatus(consumerId);
     }
 
+    @Override
+    public Optional<ChatBoat> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId) {
+        return chatBoatRepository.findByActiveTrueAndNotificationReadTrueAndUserConsumerId(consumerId);
+    }
+
 }

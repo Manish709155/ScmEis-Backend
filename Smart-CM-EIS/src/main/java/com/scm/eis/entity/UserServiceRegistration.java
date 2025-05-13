@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.io.Serializable;
 @Entity
@@ -74,5 +75,9 @@ public class UserServiceRegistration extends SuperEntity implements Serializable
     @Column(name = "user_asked_query")
     @Lob
     String userAskedQuery;
+
+    @Column(name = "notification_read")
+    @ColumnDefault(value = "1")
+    Boolean notificationRead = Boolean.TRUE;
 
 }

@@ -16,4 +16,8 @@ public interface ChatBoatRepository extends JpaRepository<ChatBoat,Long> {
 
     @Query("SELECT ch FROM ChatBoat ch Right JOIN User u ON ch.user.id = u.id WHERE  (u.consumerId =:consumerId AND ch.active =true AND ch.solutionStatus IN (com.scm.eis.constant.SolutionStatus.CREATED, com.scm.eis.constant.SolutionStatus.ON_HOLD,com.scm.eis.constant.SolutionStatus.IN_PROGRESS,com.scm.eis.constant.SolutionStatus.PENDING)) ")
     Optional<ChatBoat> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId);
+
+
+    @Query("SELECT ch FROM ChatBoat ch Right JOIN User u ON ch.user.id = u.id WHERE  (u.consumerId =:consumerId AND ch.active =true AND ch.notificationRead=true)")
+    Optional<ChatBoat> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId);
 }
