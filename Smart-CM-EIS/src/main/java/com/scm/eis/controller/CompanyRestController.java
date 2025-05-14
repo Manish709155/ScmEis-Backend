@@ -34,8 +34,8 @@ public class CompanyRestController {
 
 
 
-    @GetMapping("/findByCompanyId")
-    public ResponseEntity<Object> getResponse(@RequestParam  Long companyId){
+    @GetMapping("/findByCompanyId/{companyId}")
+    public ResponseEntity<Object> getResponse(@PathVariable("companyId")  Long companyId){
 
         try
         {

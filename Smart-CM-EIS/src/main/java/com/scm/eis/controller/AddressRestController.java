@@ -20,8 +20,8 @@ public class AddressRestController {
     @Autowired
     AddressHelper addressHelper;
 
-    @GetMapping("findAddressById")
-    public ResponseEntity<Object> findAddressById(@RequestParam Long id){
+    @GetMapping("findAddressById/{id}")
+    public ResponseEntity<Object> findAddressById(@PathVariable("id") Long id){
         try{
             return new ResponseEntity<>(addressHelper.findAddressById(id),  HttpStatus.OK);
         }

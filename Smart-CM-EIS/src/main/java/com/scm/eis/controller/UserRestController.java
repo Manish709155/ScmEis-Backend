@@ -53,8 +53,8 @@ public class UserRestController {
         }
     }
 
-    @PostMapping("user/validate-otp")
-    public ResponseEntity<Object> validateOtp(@RequestParam String otp){
+    @GetMapping("user/validate-otp/{otp}")
+    public ResponseEntity<Object> validateOtp(@PathVariable("otp") String otp){
         try {
             return  new ResponseEntity<>(userHelper.validateOtp(otp), HttpStatus.OK);
 
@@ -73,8 +73,8 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("findByUserId")
-    public ResponseEntity<Object> findById(@RequestParam Long id){
+    @GetMapping("findByUserId/{id}")
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id){
         try{
             return new ResponseEntity<>(userHelper.getresponse(userService.findUserById(id)),  HttpStatus.OK);
         }

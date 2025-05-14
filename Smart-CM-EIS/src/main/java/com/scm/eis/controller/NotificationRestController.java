@@ -29,8 +29,8 @@ public class NotificationRestController {
     @Autowired
     ChatBoatHelper chatBoatHelper;
 
-    @GetMapping("/manualQuery")
-    public ResponseEntity<Object> getManualQueryNotification(@RequestParam String consumerId){
+    @GetMapping("/manualQuery/{consumerId}")
+    public ResponseEntity<Object> getManualQueryNotification(@PathVariable("consumerId") String consumerId){
         try {
             return  new ResponseEntity<>( userServiceRegistrationHelper.getNotification(consumerId), HttpStatus.OK);
 
@@ -39,8 +39,8 @@ public class NotificationRestController {
         }
     }
 
-    @GetMapping("/chatBoatQuery")
-    public ResponseEntity<Object> getChatQueryNotification(@RequestParam String consumerId){
+    @GetMapping("/chatBoatQuery/{consumerId}")
+    public ResponseEntity<Object> getChatQueryNotification(@PathVariable("consumerId") String consumerId){
         try {
             return  new ResponseEntity<>( chatBoatHelper.getNotification(consumerId), HttpStatus.OK);
 
