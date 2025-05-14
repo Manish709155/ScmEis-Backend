@@ -11,7 +11,7 @@
 	<groupId>com.scm.eis</groupId>
 	<artifactId>Smart-CM-EIS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-<!--	<packaging>pom</packaging>-->
+	<packaging>jar</packaging>
 	<name>Smart-CM-EIS</name>
 	<description>Smart CM EIS</description>
 	<url/>
