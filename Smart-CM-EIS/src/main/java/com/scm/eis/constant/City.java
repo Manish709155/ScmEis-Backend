@@ -166,7 +166,6 @@ public enum City {
     NARMADA("Narmada"),
     NAVSARI("Navsari"),
     PANCHMAHALS("Panchmahal"),
-    PATAN("Patan"),
     PORBANDAR("Porbandar"),
     RAJKOT("Rajkot"),
     SABARKANTHA("Sabarkantha"),

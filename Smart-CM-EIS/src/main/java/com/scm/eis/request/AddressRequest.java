@@ -21,5 +21,6 @@ public class AddressRequest implements Serializable {
     String streetName;
     String apartmentNumber;
     String landmarkNBYL;
+    State state;
     AddressType addressType;
 }

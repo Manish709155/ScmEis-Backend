@@ -78,11 +78,11 @@ public class EmployeeHelper {
         Address address = new Address();
         address.setHouseNumber(request.getAddressRequest().getHouseNumber());
         address.setCity(request.getAddressRequest().getCity());
-        address.setState(State.BIHAR);
+        address.setState(request.getAddressRequest().getState());
         address.setDistrict(request.getAddressRequest().getDistrict());
         address.setPostOfficeName(request.getAddressRequest().getPostOfficeName());
         address.setPinCode(request.getAddressRequest().getPinCode());
-        address.setCountry(CountryEnum.INDIA);
+        address.setCountry(request.getCountryEnum());
         address.setPoliceStation(request.getAddressRequest().getPoliceStation());
         address.setStreetName(request.getAddressRequest().getStreetName());
         address.setApartmentNumber(request.getAddressRequest().getApartmentNumber());
