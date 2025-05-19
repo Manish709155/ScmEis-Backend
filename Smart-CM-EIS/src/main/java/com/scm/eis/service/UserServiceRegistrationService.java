@@ -15,5 +15,7 @@ public interface UserServiceRegistrationService {
     UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
 
     Optional<UserServiceRegistration> findByNotificationReadActiveTrueAndConsumerId(String consumerId);
+
+
 }
 

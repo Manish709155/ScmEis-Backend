@@ -39,8 +39,6 @@ public class EmployeeListResponse {
 
     String mobileNumber;
 
-    String password;
-
     GenderEnum genderType;
 
     AnyDisability anyDisability;
@@ -54,8 +52,5 @@ public class EmployeeListResponse {
     Long companyId;
 
     CountryEnum countryEnum;
-
-    EmpNationalUnIdnRequest empNationalUnIdnRequest;
-
-    AddressRequest addressRequest;
+    
 }
