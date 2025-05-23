@@ -13,6 +13,7 @@ import com.scm.eis.repository.UserRepository;
 import com.scm.eis.request.UserRequest;
 import com.scm.eis.request.UserUpdateRequest;
 import com.scm.eis.response.UserListResponse;
+import com.scm.eis.response.UserLoginResponse;
 import com.scm.eis.response.UserResponse;
 import com.scm.eis.service.AddressService;
 import com.scm.eis.service.CompanyService;
@@ -95,14 +96,22 @@ public class UserHelper {
 
         return userService.createUser(newUser);
     }
-    public String   logInUser(String userEmailId,String userMobileNo,String password) {
+
+    public UserLoginResponse logInUser(String userEmailId, String userMobileNo, String password) {
         Optional<User> user = userService.findUserByEmailIdOrMobileNoAndPassword(userEmailId, userMobileNo, password);
+
         if (user.isPresent()) {
-            return "User has been login successfully.....!";
+            return UserLoginResponse.builder()
+                    .loginUserId(user.get().getId())
+                    .loginConsumerId(user.get().getConsumerId())
+                    .loginResponse("User has been login successfully.....!")
+                    .build();
         } else {
-            return  "User not found......!";
+            throw new RuntimeException("User not found......!");
         }
     }
+
+
     public String validateOtp(String Otp) {
         Optional<User> user = userService.findByUserOtp(Otp);
         User usr=user.get();

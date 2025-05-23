@@ -4,6 +4,7 @@ import com.scm.eis.entity.User;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.helper.UserHelper;
 import com.scm.eis.request.*;
+import com.scm.eis.response.UserLoginResponse;
 import com.scm.eis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,15 +33,22 @@ public class UserRestController {
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/login/user")
-    public ResponseEntity<Object> userLogIn(@RequestBody UserLogInRequest request){
+    @GetMapping("/login/user/{emailId}/{mobileNumber}/{password}")
+    public ResponseEntity<?> userLogIn(
+            @PathVariable String emailId,
+            @PathVariable String mobileNumber,
+            @PathVariable String password) {
         try {
-            return  new ResponseEntity<>(userHelper.logInUser(request.getEmailId(),request.getMobileNumber(),request.getPassword()), HttpStatus.OK);
-
+            UserLoginResponse response = userHelper.logInUser(emailId, mobileNumber, password);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+
+
+
 
     @PostMapping("user/forgot-password")
     public ResponseEntity<Object> forgotPassword(@RequestBody UserForgotPasswordRequest request){
