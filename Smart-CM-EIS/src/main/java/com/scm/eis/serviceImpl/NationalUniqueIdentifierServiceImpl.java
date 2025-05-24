@@ -15,7 +15,6 @@ public class NationalUniqueIdentifierServiceImpl implements NationalUniqueIdenti
     NationalUniqueIdentifierRepository nationalUniqueIdentifierRepository;
 
 
-
     @Override
     public Optional<NationalUniqueIdentifier> findByPanNumberOrAdharNumber(String panNumber, String adharNumber) {
         return nationalUniqueIdentifierRepository.findByPanNumberOrAdharNumber(panNumber, adharNumber);
@@ -23,6 +22,11 @@ public class NationalUniqueIdentifierServiceImpl implements NationalUniqueIdenti
 
     @Override
     public NationalUniqueIdentifier createNationalUniqueIdentifier(NationalUniqueIdentifier nationalUniqueIdentifier) {
-       return nationalUniqueIdentifierRepository.save(nationalUniqueIdentifier);
+        return nationalUniqueIdentifierRepository.save(nationalUniqueIdentifier);
+    }
+
+    @Override
+    public NationalUniqueIdentifier findByActiveTrueAndUserId(Long userId) {
+        return nationalUniqueIdentifierRepository.findByActiveTrueAndUserId(userId);
     }
 }

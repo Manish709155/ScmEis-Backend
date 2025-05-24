@@ -28,4 +28,9 @@ public class AddressServiceImpl implements AddressService {
     public List<Address> findAllAddresses() {
         return addressRepository.findAll();
     }
+
+    @Override
+    public Address findByActiveTrueAndUserId(Long userId) {
+        return addressRepository.findByActiveTrueAndUserId(userId);
+    }
 }

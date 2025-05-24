@@ -151,6 +151,8 @@ public class UserHelper {
         return "Password has been successfully updated...!";
     }
     public UserResponse getresponse(Optional<User> user){
+      Address address=addressService.findByActiveTrueAndUserId(user.get().getId());
+        NationalUniqueIdentifier nationalUniqueIdentifier=nationalUniqueIdentifierService.findByActiveTrueAndUserId(user.get().getId());
         return UserResponse.builder()
                 .id(user.get().getId())
                 .firstName(user.get().getFirstName())
@@ -161,7 +163,14 @@ public class UserHelper {
                 .consumerId(user.get().getConsumerId())
                 .roleType(user.get().getRoleType())
                 .genderType(user.get().getGenderType())
-                .countryEnum(user.get().getCountryEnum())
+                .countryEnum(address.getCountry())
+                .city(address.getCity())
+                .state(address.getState())
+                .houseNo(address.getHouseNumber())
+                .pinCode(address.getPinCode())
+                .district(address.getDistrict())
+                .panNumber(nationalUniqueIdentifier.getPanNumber())
+                .adharNumber(nationalUniqueIdentifier.getAdharNumber())
                 .build();
     }
     public List<UserListResponse> getAllUsers(List<User> users){

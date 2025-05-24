@@ -1,19 +1,12 @@
 package com.scm.eis.response;
-
 import com.scm.eis.constant.CountryEnum;
 import com.scm.eis.constant.GenderEnum;
 import com.scm.eis.constant.RoleTypeEnum;
-import com.scm.eis.entity.Company;
-import com.scm.eis.entity.UserServiceRegistration;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.scm.eis.constant.State;
+import com.scm.eis.constant.District;
+import com.scm.eis.constant.City;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalTime;
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -40,6 +33,20 @@ public class UserResponse {
     GenderEnum genderType;
 
     CountryEnum countryEnum;
+
+    City city;
+
+    State state;
+
+    String houseNo;
+
+    String pinCode;
+
+    District district;
+
+    String panNumber;
+
+    String adharNumber;
 
 }
 

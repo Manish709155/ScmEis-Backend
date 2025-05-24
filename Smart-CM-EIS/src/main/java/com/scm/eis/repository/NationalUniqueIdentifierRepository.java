@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface NationalUniqueIdentifierRepository extends JpaRepository<NationalUniqueIdentifier, Long> {
     Optional<NationalUniqueIdentifier> findByPanNumberOrAdharNumber(String panNumber, String adharNumber);
+    NationalUniqueIdentifier findByActiveTrueAndUserId(Long userId);
 }
