@@ -33,11 +33,11 @@ public class UserRestController {
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/login/user/{emailId}/{mobileNumber}/{password}")
+    @GetMapping("/login/user")
     public ResponseEntity<?> userLogIn(
-            @PathVariable String emailId,
-            @PathVariable String mobileNumber,
-            @PathVariable String password) {
+            @RequestParam(required = false) String emailId,
+            @RequestParam(required = false) String mobileNumber,
+            @RequestParam(required = true) String password) {
         try {
             UserLoginResponse response = userHelper.logInUser(emailId, mobileNumber, password);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -45,6 +45,7 @@ public class UserRestController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
 
 
 
