@@ -18,4 +18,6 @@ public interface ChatBoatService {
 
     Optional<ChatBoat> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId);
 
+    List<ChatBoat> findUnreadNotifications();
+
 }

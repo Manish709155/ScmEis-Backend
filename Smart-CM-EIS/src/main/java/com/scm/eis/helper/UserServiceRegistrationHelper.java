@@ -1,23 +1,20 @@
 package com.scm.eis.helper;
 
-import com.scm.eis.constant.*;
-import com.scm.eis.entity.*;
-import com.scm.eis.exception.EmployeeCreateException;
+import com.scm.eis.constant.SolutionStatus;
+import com.scm.eis.entity.Employee;
+import com.scm.eis.entity.UserServiceRegistration;
 import com.scm.eis.exception.QueryCreatedException;
-import com.scm.eis.exception.UserCreateException;
-import com.scm.eis.exception.UserServiceRegistrationCreateException;
-import com.scm.eis.request.NotificationRequest;
 import com.scm.eis.request.UserServiceRegistrationRequest;
 import com.scm.eis.response.NotificationResponse;
 import com.scm.eis.response.UserQueryStatus;
-import com.scm.eis.response.UserResponse;
-import com.scm.eis.service.*;
+import com.scm.eis.service.EmployeeService;
+import com.scm.eis.service.UserService;
+import com.scm.eis.service.UserServiceRegistrationService;
 import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Optional;
 
 @Component
@@ -32,18 +29,28 @@ public class UserServiceRegistrationHelper {
     @Autowired
     UserService userService;
 
-    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws QueryCreatedException{
-        Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevelAndSapCard(userServiceRegistrationRequest.getEmployeeCategory(),userServiceRegistrationRequest.getEmployeeLevel(),userServiceRegistrationRequest.getEmployeeSapCard());
-        Optional<UserServiceRegistration> userServiceRegistration  = userServiceRegistrationService.findByConsumerIdAndActiveTrueAndSolutionStatus(userServiceRegistrationRequest.getConsumerId());
+    public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws QueryCreatedException {
+        Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevelAndSapCard(
+                userServiceRegistrationRequest.getEmployeeCategory(),
+                userServiceRegistrationRequest.getEmployeeLevel(),
+                userServiceRegistrationRequest.getEmployeeSapCard()
+        );
+        Optional<UserServiceRegistration> userServiceRegistration = userServiceRegistrationService.findByConsumerIdAndActiveTrueAndSolutionStatus(
+                userServiceRegistrationRequest.getConsumerId()
+        );
 
         if (userServiceRegistration.isPresent()) {
             throw new QueryCreatedException(userServiceRegistration.get().getSolutionStatus());
         }
         UserServiceRegistration newUserServiceRegistration = new UserServiceRegistration();
+        if (userServiceRegistrationRequest.getTechSolutionsTypes() != null) {
+            newUserServiceRegistration.setTechSolutionsTypes(userServiceRegistrationRequest.getTechSolutionsTypes());
+        }
+        if (userServiceRegistrationRequest.getNonTechSolutionsTypes() != null) {
+            newUserServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
+        }
         newUserServiceRegistration.setEmployee(employee);
-        newUserServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
         newUserServiceRegistration.setEmployeeLevel(employee.getEmployeeLevel());
-        newUserServiceRegistration.setTechSolutionsTypes(newUserServiceRegistration.getTechSolutionsTypes());
         newUserServiceRegistration.setTicketNumber(CommonUtil.generateTicketNumber());
         newUserServiceRegistration.setCreatedOn(LocalDateTime.now());
         newUserServiceRegistration.setQueryUnder(userServiceRegistrationRequest.getQueryUnder());
@@ -53,10 +60,12 @@ public class UserServiceRegistrationHelper {
         newUserServiceRegistration.setLanguage(userServiceRegistrationRequest.getLanguage());
         newUserServiceRegistration.setUserAskedQuery(userServiceRegistrationRequest.getUserAskedQuery());
         newUserServiceRegistration.setEscalationPriority(userServiceRegistrationRequest.getEscalationPriority());
-        newUserServiceRegistration.setUser(userService.findByActiveTrueAndConsumerId(userServiceRegistrationRequest.getConsumerId()));
-        newUserServiceRegistration.setEmployee(employee);
+        newUserServiceRegistration.setUser(
+                userService.findByActiveTrueAndConsumerId(userServiceRegistrationRequest.getConsumerId())
+        );
         return userServiceRegistrationService.createUserServiceRegistration(newUserServiceRegistration);
     }
+
 
     public UserQueryStatus getUserQueryProgress(String ticketNumber){
         UserServiceRegistration userServiceRegistration = userServiceRegistrationService.findByTicketNumberAndActiveTrue(ticketNumber);

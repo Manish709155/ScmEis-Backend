@@ -19,4 +19,8 @@ public interface UserServiceRegistrationRepository extends JpaRepository<UserSer
     Optional<UserServiceRegistration> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId);
 
     UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
+
+    @Query("SELECT us FROM UserServiceRegistration us WHERE us.notificationRead = true")
+    List<UserServiceRegistration> findUnreadNotifications();
+
 }

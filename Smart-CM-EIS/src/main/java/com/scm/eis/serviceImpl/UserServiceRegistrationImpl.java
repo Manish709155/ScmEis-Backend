@@ -38,4 +38,9 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
         return userServiceRegistrationRepository.findByActiveTrueAndNotificationReadTrueAndUserConsumerId(consumerId);
     }
 
+    @Override
+    public List<UserServiceRegistration> findUnreadNotifications() {
+        return userServiceRegistrationRepository.findUnreadNotifications();
+    }
+
 }

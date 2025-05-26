@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,4 +21,8 @@ public interface ChatBoatRepository extends JpaRepository<ChatBoat,Long> {
 
     @Query("SELECT ch FROM ChatBoat ch Right JOIN User u ON ch.user.id = u.id WHERE  (u.consumerId =:consumerId AND ch.active =true AND ch.notificationRead=true)")
     Optional<ChatBoat> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId);
+
+    @Query("SELECT c FROM ChatBoat c WHERE c.notificationRead = true")
+    List<ChatBoat> findUnreadNotifications();
+
 }

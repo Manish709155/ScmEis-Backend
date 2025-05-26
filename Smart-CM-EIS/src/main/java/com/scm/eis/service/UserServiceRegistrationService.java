@@ -1,6 +1,7 @@
 package com.scm.eis.service;
 
 import com.scm.eis.constant.SolutionStatus;
+import com.scm.eis.entity.ChatBoat;
 import com.scm.eis.entity.UserServiceRegistration;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public interface UserServiceRegistrationService {
 
     Optional<UserServiceRegistration> findByNotificationReadActiveTrueAndConsumerId(String consumerId);
 
+    List<UserServiceRegistration> findUnreadNotifications();
 
 }
 

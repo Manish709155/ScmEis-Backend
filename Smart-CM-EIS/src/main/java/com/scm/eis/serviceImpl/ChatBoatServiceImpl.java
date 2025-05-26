@@ -38,4 +38,10 @@ public class ChatBoatServiceImpl implements ChatBoatService {
         return chatBoatRepository.findByActiveTrueAndNotificationReadTrueAndUserConsumerId(consumerId);
     }
 
+    @Override
+    public List<ChatBoat> findUnreadNotifications() {
+
+        return  chatBoatRepository.findUnreadNotifications();
+    }
+
 }
