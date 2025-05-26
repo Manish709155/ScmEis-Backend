@@ -8,9 +8,12 @@ import com.scm.eis.repository.EmployeeRepository;
 import com.scm.eis.request.EmployeeRequest;
 import com.scm.eis.request.EmployeeUpdateRequest;
 import com.scm.eis.response.EmployeeListResponse;
+import com.scm.eis.response.EmployeeLoginResponse;
 import com.scm.eis.response.EmployeeResponse;
+import com.scm.eis.response.UserLoginResponse;
 import com.scm.eis.service.AddressService;
 import com.scm.eis.service.CompanyService;
+import com.scm.eis.service.EmployeeService;
 import com.scm.eis.service.NationalUniqueIdentifierService;
 import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class EmployeeHelper {
 
     @Autowired
     AddressService addressService;
+
+    @Autowired
+    EmployeeService employeeService;
 
 
 
@@ -151,6 +157,20 @@ public class EmployeeHelper {
         return employeeRepository.save(employee);
 
     }
+    public EmployeeLoginResponse logInEmployee(String companyEmailId,String mobileNumber, String password){
+        Optional<Employee> employee= employeeService.findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(companyEmailId,mobileNumber,password);
+
+        if (employee.isPresent()){
+            return EmployeeLoginResponse.builder()
+                    .employeeLoginId(employee.get().getId())
+                    .loginSapId(employee.get().getSapCard())
+                    .loginResponse("Employee has been login successfully.....!")
+                    .build();
+        } else {
+            throw new RuntimeException("Employee not found......!");
+        }
+    }
+
 
     @Autowired
     EmployeeRepository employeeRepository;

@@ -8,6 +8,7 @@ import com.scm.eis.helper.UserHelper;
 import com.scm.eis.request.EmployeeRequest;
 import com.scm.eis.request.EmployeeUpdateRequest;
 import com.scm.eis.request.UserRequest;
+import com.scm.eis.response.EmployeeLoginResponse;
 import com.scm.eis.service.EmployeeService;
 import com.scm.eis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class EmployeeRestController {
     @Autowired
     EmployeeHelper employeeHelper;
 
+
     @PostMapping("create/employee")
     public ResponseEntity<Object> createCompany(@RequestBody EmployeeRequest request){
         try
@@ -35,6 +37,19 @@ public class EmployeeRestController {
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/login/employee")
+    public ResponseEntity<?> employeeLogIn(
+            @RequestParam(required = false) String companyEmailId,
+            @RequestParam(required = false) String mobileNumber,
+            @RequestParam(required = true) String password) {
+        try{
+            EmployeeLoginResponse response = employeeHelper.logInEmployee(companyEmailId,mobileNumber,password);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping("findByEmployeeId")
     public ResponseEntity<Object> findById(@RequestParam Long id){

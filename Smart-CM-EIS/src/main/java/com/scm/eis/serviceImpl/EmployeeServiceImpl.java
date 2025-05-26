@@ -43,5 +43,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByEmployeeDepartmentAndActiveTrue(employeeDepartment);
     }
 
+    @Override
+    public Optional<Employee> findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(String companyEmailId, String mobileNumber, String password) {
+        return employeeRepository.findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(companyEmailId,mobileNumber,password);
+    }
+
 
 }
