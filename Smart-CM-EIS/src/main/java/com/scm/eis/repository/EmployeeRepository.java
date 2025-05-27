@@ -7,6 +7,8 @@ import com.scm.eis.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
@@ -14,4 +16,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     Employee findByEmployeeCategoryAndEmployeeLevelAndSapCard(EmployeeCategory employeeCategory, EmployeeLevel employeeLevel,String sapCard);
 
     Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment);
+
+    Optional<Employee> findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(String companyEmailId, String mobileNumber, String password);
 }
