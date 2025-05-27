@@ -19,5 +19,7 @@ public interface UserServiceRegistrationService {
 
     List<UserServiceRegistration> findUnreadNotifications();
 
+    List<UserServiceRegistration> getManualComplaintListResponse();
+
 }
 

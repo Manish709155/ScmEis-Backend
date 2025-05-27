@@ -19,6 +19,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -57,6 +58,7 @@ User user=webSocketEventListener.getChatUser(chatBoatRequest.getValidateConsumer
         newChatBoat.setMessageType(MessageType.CHAT);
         newChatBoat.setTicketNumber(CommonUtil.generateTicketNumber());
         newChatBoat.setServiceNumber(CommonUtil.generateServiceNumber());
+        newChatBoat.setCreatedOn(LocalDateTime.now());
         newChatBoat.setUser(user);
         chatBoatService.userAskedQueryByChatBoat(newChatBoat);
         chatUser(chatBoatRequest);

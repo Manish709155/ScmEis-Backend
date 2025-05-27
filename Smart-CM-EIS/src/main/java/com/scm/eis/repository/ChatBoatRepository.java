@@ -22,7 +22,10 @@ public interface ChatBoatRepository extends JpaRepository<ChatBoat,Long> {
     @Query("SELECT ch FROM ChatBoat ch Right JOIN User u ON ch.user.id = u.id WHERE  (u.consumerId =:consumerId AND ch.active =true AND ch.notificationRead=true)")
     Optional<ChatBoat> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId);
 
-    @Query("SELECT c FROM ChatBoat c WHERE c.notificationRead = true")
+    @Query("SELECT c FROM ChatBoat c WHERE c.active = true")
     List<ChatBoat> findUnreadNotifications();
+
+    @Query("SELECT c FROM ChatBoat c WHERE c.active = true")
+    List<ChatBoat> getChatBoatComplainListResponse();
 
 }

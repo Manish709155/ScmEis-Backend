@@ -43,4 +43,9 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
         return userServiceRegistrationRepository.findUnreadNotifications();
     }
 
+    @Override
+    public List<UserServiceRegistration> getManualComplaintListResponse() {
+        return userServiceRegistrationRepository.getManualComplaintListResponse();
+    }
+
 }

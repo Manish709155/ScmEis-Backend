@@ -20,7 +20,10 @@ public interface UserServiceRegistrationRepository extends JpaRepository<UserSer
 
     UserServiceRegistration findByTicketNumberAndActiveTrue(String ticketNumber);
 
-    @Query("SELECT us FROM UserServiceRegistration us WHERE us.notificationRead = true")
+    @Query("SELECT us FROM UserServiceRegistration us WHERE us.active = true")
     List<UserServiceRegistration> findUnreadNotifications();
+
+    @Query("SELECT us FROM UserServiceRegistration us WHERE us.active = true")
+    List<UserServiceRegistration> getManualComplaintListResponse();
 
 }

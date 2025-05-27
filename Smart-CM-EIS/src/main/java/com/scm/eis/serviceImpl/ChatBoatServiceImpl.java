@@ -44,4 +44,9 @@ public class ChatBoatServiceImpl implements ChatBoatService {
         return  chatBoatRepository.findUnreadNotifications();
     }
 
+    @Override
+    public List<ChatBoat> getChatBoatComplainListResponse() {
+        return chatBoatRepository.getChatBoatComplainListResponse();
+    }
+
 }

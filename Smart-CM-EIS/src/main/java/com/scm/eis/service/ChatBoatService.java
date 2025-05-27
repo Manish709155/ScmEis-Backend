@@ -20,4 +20,5 @@ public interface ChatBoatService {
 
     List<ChatBoat> findUnreadNotifications();
 
+    List<ChatBoat> getChatBoatComplainListResponse();
 }
