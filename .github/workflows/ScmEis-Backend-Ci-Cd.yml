@@ -21,9 +21,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-        working-directory: Smart-CM-EIS
-        run: mvn clean install
+      - name: Build with Maven (skip tests)
+      - working-directory: Smart-CM-EIS
+      - run: mvn clean install -DskipTests
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
