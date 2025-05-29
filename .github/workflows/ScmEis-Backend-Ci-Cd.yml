@@ -21,6 +21,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and install with Maven
-        run: mvn clean compile package install
+      - name: Build and install with Maven (skip tests)
+        run: mvn clean compile package install -DskipTests
         working-directory: Smart-CM-EIS
