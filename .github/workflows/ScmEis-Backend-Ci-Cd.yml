@@ -32,9 +32,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .                      # If Dockerfile depends on whole repo
-          file: Smart-CM-EIS/Dockerfile
-          push: true
-          tags: manishkumarofficial03021998/smart-cm-eis:latest
+      - uses: docker/build-push-action@v5
+      - with:
+      - context: Smart-CM-EIS             # this folder contains the JAR and Dockerfile
+      - file: Smart-CM-EIS/Dockerfile     # Dockerfile path
+      - push: true
+      - tags: manishkumarofficial03021998/smart-cm-eis:latest
