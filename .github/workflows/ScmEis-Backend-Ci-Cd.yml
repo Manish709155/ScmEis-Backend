@@ -22,6 +22,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
+        working-directory: Smart-CM-EIS
         run: mvn clean install
 
       - name: Log in to Docker Hub
@@ -33,7 +34,7 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .                      # Build context (root directory)
-          file: Smart-CM-EIS/Dockerfile  # Path to your Dockerfile
+          context: .                      # If Dockerfile depends on whole repo
+          file: Smart-CM-EIS/Dockerfile
           push: true
           tags: manishkumarofficial03021998/smart-cm-eis:latest
