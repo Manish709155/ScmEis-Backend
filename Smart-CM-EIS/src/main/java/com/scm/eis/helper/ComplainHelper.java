@@ -37,6 +37,7 @@ public class ComplainHelper {
                                         .ticketNumber(user.getTicketNumber())
                                         .serviceNumber(user.getServiceNumber())
                                         .solutionStatus(user.getSolutionStatus())
+                                        .supportChannel(user.getSupportChannel())
                                         .language(user.getLanguage())
                                         .escalationPriority(user.getEscalationPriority())
                                         .queryUnder(user.getQueryUnder())
