@@ -22,4 +22,6 @@ public interface EmployeeService {
     Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment);
 
     Optional<Employee> findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(String companyEmailId, String mobileNumber, String password);
+
+    Optional<Employee> findEmployeeByPersonalEmailIdOrCompanyEmailIdAndPassword(String personalEmailId,String companyEmailId, String password);
 }

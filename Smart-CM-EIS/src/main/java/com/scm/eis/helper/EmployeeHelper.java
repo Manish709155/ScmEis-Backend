@@ -170,6 +170,12 @@ public class EmployeeHelper {
             throw new RuntimeException("Employee not found......!");
         }
     }
+    public String resetPassword(String companyEmailId,String personalEmailId,String password ) {
+        Optional<Employee> employee = employeeService.findEmployeeByPersonalEmailIdOrCompanyEmailIdAndPassword(personalEmailId,companyEmailId, password);
+        employee.get().setPassword(password);
+        employeeService.createEmployee(employee.get());
+        return "Password has been successfully updated...!";
+    }
 
 
     @Autowired

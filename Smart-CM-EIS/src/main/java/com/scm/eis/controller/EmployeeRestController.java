@@ -5,9 +5,7 @@ import com.scm.eis.exception.EmployeeCreateException;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.helper.EmployeeHelper;
 import com.scm.eis.helper.UserHelper;
-import com.scm.eis.request.EmployeeRequest;
-import com.scm.eis.request.EmployeeUpdateRequest;
-import com.scm.eis.request.UserRequest;
+import com.scm.eis.request.*;
 import com.scm.eis.response.EmployeeLoginResponse;
 import com.scm.eis.service.EmployeeService;
 import com.scm.eis.service.UserService;
@@ -82,5 +80,18 @@ public class EmployeeRestController {
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("employee/reset-password")
+    public ResponseEntity<Object> resetpassword(@RequestBody EmployeeForgotPasswordRequest request){
+        try {
+            return  new ResponseEntity<>(employeeHelper.resetPassword(request.getPersonalEmailId(),request.getCompanyEmailId(),request.getPassword()), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 
 }
