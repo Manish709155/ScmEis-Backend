@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EmployeeForgotPasswordRequest {
-
-    String personalEmailId;
+public class EmployeeResetPasswordRequest {
 
     String companyEmailId;
+
+    String sapCard;
 
     String password;
 

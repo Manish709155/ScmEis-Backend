@@ -44,14 +44,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<Employee> findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(String companyEmailId, String mobileNumber, String password) {
-        return employeeRepository.findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(companyEmailId,mobileNumber,password);
+    public Optional<Employee> findEmployeeByCompanyEmailIdOrSapCardAndPassword(String companyEmailId, String sapCard, String password) {
+        return employeeRepository.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
     }
 
-    @Override
-    public Optional<Employee> findEmployeeByPersonalEmailIdOrCompanyEmailIdAndPassword(String personalEmailId,String companyEmailId, String password) {
-        return employeeRepository.findEmployeeByPersonalEmailIdOrCompanyEmailIdAndPassword(personalEmailId,companyEmailId, password);
-    }
+
 
 
 }

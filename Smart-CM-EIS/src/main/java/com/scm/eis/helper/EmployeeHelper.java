@@ -165,8 +165,8 @@ public class EmployeeHelper {
         return employeeRepository.save(employee);
 
     }
-    public EmployeeLoginResponse logInEmployee(String companyEmailId,String mobileNumber, String password){
-        Optional<Employee> employee= employeeService.findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(companyEmailId,mobileNumber,password);
+    public EmployeeLoginResponse logInEmployee(String companyEmailId,String sapCard, String password){
+        Optional<Employee> employee= employeeService.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
 
         if (employee.isPresent()){
             return EmployeeLoginResponse.builder()
@@ -178,8 +178,8 @@ public class EmployeeHelper {
             throw new RuntimeException("Employee not found......!");
         }
     }
-    public String resetPassword(String companyEmailId,String personalEmailId,String password ) {
-        Optional<Employee> employee = employeeService.findEmployeeByPersonalEmailIdOrCompanyEmailIdAndPassword(personalEmailId,companyEmailId, password);
+    public String resetPassword(String companyEmailId,String sapCard,String password ) {
+        Optional<Employee> employee = employeeService.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
         employee.get().setPassword(password);
         employeeService.createEmployee(employee.get());
         return "Password has been successfully updated...!";

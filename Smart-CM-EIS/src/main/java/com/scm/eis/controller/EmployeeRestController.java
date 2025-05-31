@@ -38,10 +38,10 @@ public class EmployeeRestController {
     @GetMapping("/login/employee")
     public ResponseEntity<?> employeeLogIn(
             @RequestParam(required = false) String companyEmailId,
-            @RequestParam(required = false) String mobileNumber,
+            @RequestParam(required = false) String sapCard,
             @RequestParam(required = true) String password) {
         try{
-            EmployeeLoginResponse response = employeeHelper.logInEmployee(companyEmailId,mobileNumber,password);
+            EmployeeLoginResponse response = employeeHelper.logInEmployee(companyEmailId,sapCard,password);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -82,9 +82,9 @@ public class EmployeeRestController {
     }
 
     @PostMapping("employee/reset-password")
-    public ResponseEntity<Object> resetpassword(@RequestBody EmployeeForgotPasswordRequest request){
+    public ResponseEntity<Object> resetpassword(@RequestBody EmployeeResetPasswordRequest request){
         try {
-            return  new ResponseEntity<>(employeeHelper.resetPassword(request.getPersonalEmailId(),request.getCompanyEmailId(),request.getPassword()), HttpStatus.OK);
+            return  new ResponseEntity<>(employeeHelper.resetPassword(request.getSapCard(),request.getCompanyEmailId(),request.getPassword()), HttpStatus.OK);
 
         } catch (Exception e) {
             return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
