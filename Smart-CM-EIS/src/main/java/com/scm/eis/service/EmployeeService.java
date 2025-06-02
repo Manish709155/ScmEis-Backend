@@ -21,7 +21,7 @@ public interface EmployeeService {
 
     Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment);
 
-    Optional<Employee> findEmployeeByCompanyEmailIdOrSapCardAndPassword(String companyEmailId, String sapCard, String password);
+    Optional<Employee> findEmployeeByCompanyEmailIdOrSapCard(String companyEmailId, String sapCard);
 
-
+    Optional<Employee> findEmployeeByCompanyEmailIdOrSapCardAndPassword(String companyEmailId, String sapCard,String password);
 }

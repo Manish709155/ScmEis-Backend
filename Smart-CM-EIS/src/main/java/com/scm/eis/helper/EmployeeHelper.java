@@ -179,7 +179,7 @@ public class EmployeeHelper {
         }
     }
     public String resetPassword(String companyEmailId,String sapCard,String password ) {
-        Optional<Employee> employee = employeeService.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
+        Optional<Employee> employee = employeeService.findEmployeeByCompanyEmailIdOrSapCard(companyEmailId,sapCard);
         employee.get().setPassword(password);
         employeeService.createEmployee(employee.get());
         return "Password has been successfully updated...!";
