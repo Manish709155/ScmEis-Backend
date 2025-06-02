@@ -107,6 +107,14 @@ public class EmployeeHelper {
                 .firstName(employee.get().getFirstName())
                 .middleName(employee.get().getMiddleName())
                 .lastName(employee.get().getLastName())
+                .sapCard(employee.get().getSapCard())
+                .salary(employee.get().getSalary())
+                .joiningDate(employee.get().getJoiningDate())
+                .dob(employee.get().getDob())
+                .companyEmailId(employee.get().getCompanyEmailId())
+                .anyDisability(employee.get().getAnyDisability())
+                .bloodGroup(employee.get().getBloodGroup())
+                .companyId(employee.get().getCompany().getId())
                 .personalEmailId(employee.get().getPersonalEmailId())
                 .mobileNumber(employee.get().getMobileNumber())
                 .employeeCategory(employee.get().getEmployeeCategory())
@@ -157,8 +165,8 @@ public class EmployeeHelper {
         return employeeRepository.save(employee);
 
     }
-    public EmployeeLoginResponse logInEmployee(String companyEmailId,String mobileNumber, String password){
-        Optional<Employee> employee= employeeService.findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(companyEmailId,mobileNumber,password);
+    public EmployeeLoginResponse logInEmployee(String companyEmailId,String sapCard, String password){
+        Optional<Employee> employee= employeeService.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
 
         if (employee.isPresent()){
             return EmployeeLoginResponse.builder()
@@ -169,6 +177,12 @@ public class EmployeeHelper {
         } else {
             throw new RuntimeException("Employee not found......!");
         }
+    }
+    public String resetPassword(String companyEmailId,String sapCard,String password ) {
+        Optional<Employee> employee = employeeService.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
+        employee.get().setPassword(password);
+        employeeService.createEmployee(employee.get());
+        return "Password has been successfully updated...!";
     }
 
 

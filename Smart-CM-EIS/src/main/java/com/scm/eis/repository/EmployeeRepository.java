@@ -17,5 +17,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
     Employee findByEmployeeDepartmentAndActiveTrue(EmployeeDepartment employeeDepartment);
 
-    Optional<Employee> findEmployeeByCompanyEmailIdOrMobileNumberAndPassword(String companyEmailId, String mobileNumber, String password);
+    Optional<Employee> findEmployeeByCompanyEmailIdOrSapCardAndPassword(String companyEmailId, String sapCard, String password);
+
+
 }
