@@ -21,5 +21,6 @@ public interface UserServiceRegistrationService {
 
     List<UserServiceRegistration> getManualComplaintListResponse();
 
+
 }
 

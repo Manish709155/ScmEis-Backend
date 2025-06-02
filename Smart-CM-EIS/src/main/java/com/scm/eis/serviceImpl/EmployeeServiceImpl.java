@@ -53,5 +53,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findEmployeeByCompanyEmailIdOrSapCardAndPassword(companyEmailId,sapCard,password);
     }
 
+    @Override
+    public Employee findBySapCardAndActiveTrue(String sapCard) {
+        return employeeRepository.findBySapCardAndActiveTrue(sapCard);
+    }
+
 
 }

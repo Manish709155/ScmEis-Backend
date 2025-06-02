@@ -49,4 +49,9 @@ public class ChatBoatServiceImpl implements ChatBoatService {
         return chatBoatRepository.getChatBoatComplainListResponse();
     }
 
+    @Override
+    public ChatBoat findByTicketNumberAndActiveTrue(String ticketNumber) {
+        return chatBoatRepository.findByTicketNumberAndActiveTrue(ticketNumber);
+    }
+
 }
