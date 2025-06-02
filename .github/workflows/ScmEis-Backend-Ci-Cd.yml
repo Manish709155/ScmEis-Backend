@@ -34,7 +34,7 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: Smart-CM-EIS             # this folder contains the JAR and Dockerfile
-          file: Smart-CM-EIS/Dockerfile     # Dockerfile path
+          context: Smart-CM-EIS
+          file: Smart-CM-EIS/Dockerfile
           push: true
           tags: manishkumarofficial03021998/smart-cm-eis:latest
