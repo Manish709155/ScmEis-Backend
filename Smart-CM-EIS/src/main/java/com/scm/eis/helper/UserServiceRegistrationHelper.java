@@ -30,11 +30,6 @@ public class UserServiceRegistrationHelper {
     UserService userService;
 
     public UserServiceRegistration createUserServiceRegistration(UserServiceRegistrationRequest userServiceRegistrationRequest) throws QueryCreatedException {
-        Employee employee = employeeService.findByEmployeeCategoryAndEmployeeLevelAndSapCard(
-                userServiceRegistrationRequest.getEmployeeCategory(),
-                userServiceRegistrationRequest.getEmployeeLevel(),
-                userServiceRegistrationRequest.getEmployeeSapCard()
-        );
         Optional<UserServiceRegistration> userServiceRegistration = userServiceRegistrationService.findByConsumerIdAndActiveTrueAndSolutionStatus(
                 userServiceRegistrationRequest.getConsumerId()
         );
@@ -49,8 +44,7 @@ public class UserServiceRegistrationHelper {
         if (userServiceRegistrationRequest.getNonTechSolutionsTypes() != null) {
             newUserServiceRegistration.setNonTechSolutionsTypes(userServiceRegistrationRequest.getNonTechSolutionsTypes());
         }
-        newUserServiceRegistration.setEmployee(employee);
-        newUserServiceRegistration.setEmployeeLevel(employee.getEmployeeLevel());
+        newUserServiceRegistration.setEmployeeLevel(userServiceRegistrationRequest.getEmployeeLevel());
         newUserServiceRegistration.setTicketNumber(CommonUtil.generateTicketNumber());
         newUserServiceRegistration.setCreatedOn(LocalDateTime.now());
         newUserServiceRegistration.setQueryUnder(userServiceRegistrationRequest.getQueryUnder());

@@ -37,8 +37,6 @@ public class UserServiceRegistrationRequest implements Serializable {
 
     EmployeeCategory employeeCategory;
 
-    String employeeSapCard;
-
     String userAskedQuery;
 
 }

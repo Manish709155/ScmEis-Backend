@@ -28,4 +28,5 @@ public interface ChatBoatRepository extends JpaRepository<ChatBoat,Long> {
     @Query("SELECT c FROM ChatBoat c WHERE c.active = true")
     List<ChatBoat> getChatBoatComplainListResponse();
 
+    ChatBoat findByTicketNumberAndActiveTrue(String ticketNumber);
 }
