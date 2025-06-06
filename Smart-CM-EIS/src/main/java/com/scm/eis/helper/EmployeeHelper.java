@@ -1,7 +1,9 @@
 package com.scm.eis.helper;
 
 import com.scm.eis.constant.CountryEnum;
+import com.scm.eis.constant.SolutionStatus;
 import com.scm.eis.constant.State;
+import com.scm.eis.constant.TaskType;
 import com.scm.eis.entity.*;
 import com.scm.eis.exception.EmployeeCreateException;
 import com.scm.eis.repository.EmployeeRepository;
@@ -11,10 +13,7 @@ import com.scm.eis.response.EmployeeListResponse;
 import com.scm.eis.response.EmployeeLoginResponse;
 import com.scm.eis.response.EmployeeResponse;
 import com.scm.eis.response.UserLoginResponse;
-import com.scm.eis.service.AddressService;
-import com.scm.eis.service.CompanyService;
-import com.scm.eis.service.EmployeeService;
-import com.scm.eis.service.NationalUniqueIdentifierService;
+import com.scm.eis.service.*;
 import com.scm.eis.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +38,14 @@ public class EmployeeHelper {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+    @Autowired
+    ChatBoatService chatBoatService;
+
+    @Autowired
+    UserServiceRegistrationService userServiceRegistrationService;
 
 
     public Employee getEntity(EmployeeRequest request) throws EmployeeCreateException {
@@ -185,8 +192,19 @@ public class EmployeeHelper {
         return "Password has been successfully updated...!";
     }
 
-
-    @Autowired
-    EmployeeRepository employeeRepository;
-
+    public  String taskUpdate(TaskType taskType, String ticketNumber, SolutionStatus solutionStatus){
+    ChatBoat chatBoat =chatBoatService.findByTicketNumberAndActiveTrue(ticketNumber);
+    UserServiceRegistration userSerReg= userServiceRegistrationService.findByTicketNumberAndActiveTrue(ticketNumber);
+    if (taskType.equals(TaskType.CHAT_BOAT)){
+        chatBoat.setSolutionStatus(solutionStatus);
+        chatBoatService.userAskedQueryByChatBoat(chatBoat);
+    } else if (taskType.equals(TaskType.MANUAL)) {
+        userSerReg.setSolutionStatus(solutionStatus);
+        userServiceRegistrationService.createUserServiceRegistration(userSerReg);
+    }
+    else {
+      return "Please select at least one task type.";
+    }
+        return null;
+    }
 }

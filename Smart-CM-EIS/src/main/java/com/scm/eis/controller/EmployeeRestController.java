@@ -1,6 +1,7 @@
 package com.scm.eis.controller;
 
 import com.scm.eis.constant.SolutionStatus;
+import com.scm.eis.constant.TaskType;
 import com.scm.eis.exception.EmployeeCreateException;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.helper.EmployeeHelper;
@@ -92,6 +93,16 @@ public class EmployeeRestController {
     }
 
 
+    @PutMapping("taskUpdate/{taskType}/{ticketNumber}/{solutionStatus}")
+    public ResponseEntity<Object> taskUpdate(@PathVariable("taskType") TaskType taskType,@PathVariable("ticketNumber") String ticketNumber,@PathVariable("solutionStatus") SolutionStatus solutionStatus){
+        try {
+            employeeHelper.taskUpdate(taskType,ticketNumber,solutionStatus);
+            return  new ResponseEntity<>("Task has been updated successfully.", HttpStatus.OK);
+
+        } catch (Exception e) {
+            return  new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 }
