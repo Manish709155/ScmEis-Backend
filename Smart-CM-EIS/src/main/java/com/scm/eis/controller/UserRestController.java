@@ -44,6 +44,8 @@ public class UserRestController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
+
+
     }
 
 
@@ -107,6 +109,19 @@ public class UserRestController {
         {
             userHelper.updateUserContact(request).getId();
             return new ResponseEntity<>("EmailId and mobile number updated successfully.", HttpStatus.OK);
+        }
+        catch (RuntimeException exception){
+            return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @DeleteMapping("disable/user/{consumerId}")
+    public ResponseEntity<?> disableUser(@PathVariable("consumerId") String consumerId){
+        try
+        {
+            userHelper.disableUser(consumerId);
+            return  new ResponseEntity<>("User has been disable successfully.", HttpStatus.OK);
         }
         catch (RuntimeException exception){
             return  new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

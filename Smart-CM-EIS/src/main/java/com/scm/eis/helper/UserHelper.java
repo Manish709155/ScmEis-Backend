@@ -10,6 +10,7 @@ import com.scm.eis.entity.NationalUniqueIdentifier;
 import com.scm.eis.entity.User;
 import com.scm.eis.exception.UserCreateException;
 import com.scm.eis.repository.UserRepository;
+import com.scm.eis.request.DisAbleUserReuest;
 import com.scm.eis.request.UserRequest;
 import com.scm.eis.request.UserUpdateRequest;
 import com.scm.eis.response.UserListResponse;
@@ -46,6 +47,9 @@ public class UserHelper {
 
     @Autowired
     EmailSenderUtil emailSenderUtil;
+
+    @Autowired
+    UserRepository userRepository;
 
 
     public User createUser(UserRequest userRequest) throws UserCreateException {
@@ -206,8 +210,13 @@ public class UserHelper {
         return userRepository.save(user);
     }
 
-    @Autowired
-    UserRepository userRepository;
 
+    public  void disableUser(String  consumerId){
+      User user=  userService.findByActiveTrueAndConsumerId(consumerId);
+      user.setActive(Boolean.FALSE);
+      user.setDeleted(Boolean.TRUE);
+      userService.createUser(user);
+
+    }
 
 }
