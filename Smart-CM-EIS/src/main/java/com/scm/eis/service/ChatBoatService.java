@@ -35,4 +35,6 @@ public interface ChatBoatService {
     Long countActiveoNHoldSolutions();
 
     Long countActiveinProgressSolutions();
+
+    Long countActiveApprovedSolutions();
 }

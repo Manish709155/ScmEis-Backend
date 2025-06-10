@@ -32,5 +32,7 @@ public interface UserServiceRegistrationService {
     Long countActiveONHoldSolutions();
 
     Long countActiveInProgressSolutions();
+
+    Long countActiveApprovedSolutions();
 }
 

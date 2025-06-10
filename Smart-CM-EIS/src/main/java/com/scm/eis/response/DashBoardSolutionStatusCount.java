@@ -22,6 +22,8 @@ public class DashBoardSolutionStatusCount {
 
     Long inProgressCount;
 
+    Long approvedCount;
+
     Long totalCount;
 
 

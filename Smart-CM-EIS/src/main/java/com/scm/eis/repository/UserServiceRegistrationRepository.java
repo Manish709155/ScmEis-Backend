@@ -44,4 +44,6 @@ public interface UserServiceRegistrationRepository extends JpaRepository<UserSer
     @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'IN_PROGRESS'")
     Long countActiveInProgressSolutions();
 
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'APPROVED'")
+    Long countActiveApprovedSolutions();
 }

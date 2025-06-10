@@ -78,4 +78,9 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
         return userServiceRegistrationRepository.countActiveInProgressSolutions();
     }
 
+    @Override
+    public Long countActiveApprovedSolutions() {
+        return userServiceRegistrationRepository.countActiveApprovedSolutions();
+    }
+
 }

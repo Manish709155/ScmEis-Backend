@@ -29,7 +29,9 @@ public class DashBoardHelper {
 
         Long inProgressCount = chatBoatService.countActiveinProgressSolutions() + userServiceRegistrationService.countActiveInProgressSolutions();
 
-        Long totalCount = resolvedCount + pendingCount + rejectedCount + createdCount + onHoldCount + inProgressCount;
+        Long approvedCount=chatBoatService.countActiveApprovedSolutions()+userServiceRegistrationService.countActiveApprovedSolutions();
+
+        Long totalCount = resolvedCount + pendingCount + rejectedCount + createdCount + onHoldCount + inProgressCount+approvedCount;
 
         DashBoardSolutionStatusCount dashBoardSolutionStatusCount = new DashBoardSolutionStatusCount();
 
@@ -39,6 +41,7 @@ public class DashBoardHelper {
         dashBoardSolutionStatusCount.setCreatedCount(createdCount);
         dashBoardSolutionStatusCount.setOnHoldCount(onHoldCount);
         dashBoardSolutionStatusCount.setInProgressCount(inProgressCount);
+        dashBoardSolutionStatusCount.setApprovedCount(approvedCount);
         dashBoardSolutionStatusCount.setTotalCount(totalCount);
 
         return dashBoardSolutionStatusCount;

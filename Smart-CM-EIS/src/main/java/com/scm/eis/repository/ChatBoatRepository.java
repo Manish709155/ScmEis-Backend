@@ -47,4 +47,7 @@ public interface ChatBoatRepository extends JpaRepository<ChatBoat,Long> {
 
     @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'IN_PROGRESS'")
     Long countActiveinProgressSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'APPROVED'")
+    Long countActiveApprovedSolutions();
 }

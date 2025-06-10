@@ -84,4 +84,9 @@ public class ChatBoatServiceImpl implements ChatBoatService {
         return chatBoatRepository.countActiveinProgressSolutions();
     }
 
+    @Override
+    public Long countActiveApprovedSolutions() {
+        return chatBoatRepository.countActiveApprovedSolutions();
+    }
+
 }
