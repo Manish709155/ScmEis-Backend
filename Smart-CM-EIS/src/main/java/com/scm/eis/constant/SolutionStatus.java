@@ -11,7 +11,7 @@ public enum SolutionStatus {
     APPROVED("Approved"),
     REJECTED("Rejected"),
     IN_PROGRESS("In Progress"),
-    COMPLETED("Completed"),
+    RESOLVED("Resolved"),
     ON_HOLD("On Hold"),
     CANCELLED("Cancelled"),
     SUBMITTED("Submitted");

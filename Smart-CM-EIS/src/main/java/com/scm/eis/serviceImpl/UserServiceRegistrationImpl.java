@@ -48,4 +48,34 @@ public class UserServiceRegistrationImpl implements UserServiceRegistrationServi
         return userServiceRegistrationRepository.getManualComplaintListResponse();
     }
 
+    @Override
+    public Long countActivePendingSolutions() {
+        return userServiceRegistrationRepository.countActivePendingSolutions();
+    }
+
+    @Override
+    public Long countActiveResolvedSolutions() {
+        return userServiceRegistrationRepository.countActiveResolvedSolutions();
+    }
+
+    @Override
+    public Long countActiveCreatedSolutions() {
+        return userServiceRegistrationRepository.countActiveCreatedSolutions();
+    }
+
+    @Override
+    public Long countActiveRejectedSolutions() {
+        return userServiceRegistrationRepository.countActiveRejectedSolutions();
+    }
+
+    @Override
+    public Long countActiveONHoldSolutions() {
+        return userServiceRegistrationRepository.countActiveOnHoldSolutions();
+    }
+
+    @Override
+    public Long countActiveInProgressSolutions() {
+        return userServiceRegistrationRepository.countActiveInProgressSolutions();
+    }
+
 }

@@ -21,6 +21,16 @@ public interface UserServiceRegistrationService {
 
     List<UserServiceRegistration> getManualComplaintListResponse();
 
+    Long countActivePendingSolutions();
 
+    Long countActiveResolvedSolutions();
+
+    Long countActiveCreatedSolutions();
+
+    Long countActiveRejectedSolutions();
+
+    Long countActiveONHoldSolutions();
+
+    Long countActiveInProgressSolutions();
 }
 
