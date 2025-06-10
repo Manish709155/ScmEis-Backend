@@ -23,4 +23,18 @@ public interface ChatBoatService {
     List<ChatBoat> getChatBoatComplainListResponse();
 
     ChatBoat findByTicketNumberAndActiveTrue(String ticketNumber);
+
+    Long countActivePendingSolutions();
+
+    Long countActiveResolvedSolutions();
+
+    Long countActiveCreatedSolutions();
+
+    Long countActiveRejectedSolutions();
+
+    Long countActiveoNHoldSolutions();
+
+    Long countActiveinProgressSolutions();
+
+    Long countActiveApprovedSolutions();
 }

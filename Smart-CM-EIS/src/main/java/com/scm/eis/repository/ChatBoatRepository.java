@@ -29,4 +29,25 @@ public interface ChatBoatRepository extends JpaRepository<ChatBoat,Long> {
     List<ChatBoat> getChatBoatComplainListResponse();
 
     ChatBoat findByTicketNumberAndActiveTrue(String ticketNumber);
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'PENDING'")
+    Long countActivePendingSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'RESOLVED'")
+    Long countActiveResolvedSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'CREATED'")
+    Long countActiveCreatedSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'REJECTED'")
+    Long countActiveRejectedSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'ON_HOLD'")
+    Long countActiveoNHoldSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'IN_PROGRESS'")
+    Long countActiveinProgressSolutions();
+
+    @Query("SELECT COUNT(c) FROM ChatBoat c WHERE c.active = true AND c.solutionStatus = 'APPROVED'")
+    Long countActiveApprovedSolutions();
 }

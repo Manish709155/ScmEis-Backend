@@ -26,4 +26,24 @@ public interface UserServiceRegistrationRepository extends JpaRepository<UserSer
     @Query("SELECT us FROM UserServiceRegistration us WHERE us.active = true")
     List<UserServiceRegistration> getManualComplaintListResponse();
 
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'PENDING'")
+    Long countActivePendingSolutions();
+
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'RESOLVED'")
+    Long countActiveResolvedSolutions();
+
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'CREATED'")
+    Long countActiveCreatedSolutions();
+
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'REJECTED'")
+    Long countActiveRejectedSolutions();
+
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'ON_HOLD'")
+    Long countActiveOnHoldSolutions();
+
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'IN_PROGRESS'")
+    Long countActiveInProgressSolutions();
+
+    @Query("SELECT COUNT(usr) FROM UserServiceRegistration usr WHERE usr.active = true AND usr.solutionStatus = 'APPROVED'")
+    Long countActiveApprovedSolutions();
 }

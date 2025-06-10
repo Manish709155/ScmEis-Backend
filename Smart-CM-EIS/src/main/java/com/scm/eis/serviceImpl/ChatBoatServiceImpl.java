@@ -54,4 +54,39 @@ public class ChatBoatServiceImpl implements ChatBoatService {
         return chatBoatRepository.findByTicketNumberAndActiveTrue(ticketNumber);
     }
 
+    @Override
+    public Long countActivePendingSolutions() {
+        return chatBoatRepository.countActivePendingSolutions();
+    }
+
+    @Override
+    public Long countActiveResolvedSolutions() {
+        return chatBoatRepository.countActiveResolvedSolutions();
+    }
+
+    @Override
+    public Long countActiveCreatedSolutions() {
+        return chatBoatRepository.countActiveCreatedSolutions();
+    }
+
+    @Override
+    public Long countActiveRejectedSolutions() {
+        return chatBoatRepository.countActiveRejectedSolutions();
+    }
+
+    @Override
+    public Long countActiveoNHoldSolutions() {
+        return chatBoatRepository.countActiveoNHoldSolutions();
+    }
+
+    @Override
+    public Long countActiveinProgressSolutions() {
+        return chatBoatRepository.countActiveinProgressSolutions();
+    }
+
+    @Override
+    public Long countActiveApprovedSolutions() {
+        return chatBoatRepository.countActiveApprovedSolutions();
+    }
+
 }
