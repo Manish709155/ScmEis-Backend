@@ -23,21 +23,27 @@ public class UserServiceRegistrationRestController {
     public ResponseEntity<Object> createUserServiceRegistration(@RequestBody UserServiceRegistrationRequest request) {
         try {
             if (request.getTechSolutionsTypes() != null && request.getNonTechSolutionsTypes() != null) {
-                throw new RuntimeException("Please select either Tech Solution Types or Non-Tech Solution Types, not both.");
+                if (request.getTechSolutionsTypes() != null) {
+                    request.setNonTechSolutionsTypes(null);
+                } else {
+                    request.setTechSolutionsTypes(null);
+                }
+                request.setNonTechSolutionsTypes(null);
+                request.setTechSolutionsTypes(null);
             }
+
             Long registrationId = userServiceRegistrationService.createUserServiceRegistration(
                     userServiceRegistrationHelper.createUserServiceRegistration(request)
             ).getId();
 
             return new ResponseEntity<>(registrationId, HttpStatus.OK);
-        }
-        catch (QueryCreatedException exception) {
+        } catch (QueryCreatedException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        catch (RuntimeException runtimeException) {
+        } catch (RuntimeException runtimeException) {
             return new ResponseEntity<>(runtimeException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
 
 
     @GetMapping("user/query/progress/{ticketNumber}")

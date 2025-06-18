@@ -33,13 +33,13 @@ public class TaskAssignHelper {
     public void assignManualQueryGeneratedTask(TaskAssignRequest taskAssignRequest){
      Employee employee= employeeService.findBySapCardAndActiveTrue(taskAssignRequest.getEmployeeSapId());
      UserServiceRegistration userSerReg= userServiceRegistrationService.findByTicketNumberAndActiveTrue(taskAssignRequest.getTicketNumber());
-     Optional<User> user= userService.findUserById(userSerReg.getUser().getId());
-     if (user.get().getRoleType()== RoleTypeEnum.ADMIN){
+//     Optional<User> user= userService.findUserById(userSerReg.getUser().getId());
+//     if (user.get().getRoleType()== RoleTypeEnum.ADMIN ){
          userSerReg.setEmployee(employee);
-     }
-     else {
-        throw new RuntimeException("You have not access to assign the task,only admin can do.");
-     }
+//     }
+//     else {
+//        throw new RuntimeException("You have not access to assign the task,only admin can do.");
+//     }
      userServiceRegistrationService.createUserServiceRegistration(userSerReg);
 
     }
@@ -47,13 +47,13 @@ public class TaskAssignHelper {
     public void assignChatBoatQueryGeneratedTask(TaskAssignRequest taskAssignRequest){
         Employee employee= employeeService.findBySapCardAndActiveTrue(taskAssignRequest.getEmployeeSapId());
         ChatBoat chatBoat= chatBoatService.findByTicketNumberAndActiveTrue(taskAssignRequest.getTicketNumber());
-        Optional<User> user= userService.findUserById(chatBoat.getUser().getId());
-        if (user.get().getRoleType()== RoleTypeEnum.ADMIN){
+//        Optional<User> user= userService.findUserById(chatBoat.getUser().getId());
+//        if (user.get().getRoleType()== RoleTypeEnum.ADMIN){
             chatBoat.setEmployee(employee);
-        }
-        else {
-            throw new RuntimeException("You have not access to assign the task,only admin can do.");
-        }
+//        }
+//        else {
+//            throw new RuntimeException("You have not access to assign the task,only admin can do.");
+//        }
         chatBoatService.userAskedQueryByChatBoat(chatBoat);
 
     }
